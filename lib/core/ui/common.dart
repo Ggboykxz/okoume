@@ -943,7 +943,7 @@ class ProductCard extends ConsumerWidget {
              nowWished
                ? 'Ajouté à vos favoris'
                : 'Retiré de vos favoris',
-             emoji: nowWished ? '️' : '',
+             emoji: nowWished ? '' : '',
             );
            },
            child: Container(
@@ -1315,7 +1315,7 @@ class _CountdownTextState extends State<CountdownText> {
     borderRadius: BorderRadius.circular(8),
    ),
    child: Text(
-    '⏱ ${durationHms(_remaining)}',
+    durationHms(_remaining),
     style: TextStyle(
      fontSize: widget.size,
      fontWeight: FontWeight.w800,
