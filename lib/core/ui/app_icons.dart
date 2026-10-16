@@ -125,11 +125,14 @@ class AppIcon extends StatelessWidget {
   if (data == null) {
    return SizedBox(width: size ?? 24, height: size ?? 24);
   }
-  return HugeIcon(
-   icon: data,
-   size: size,
-   color: color,
-   strokeWidth: strokeWidth,
+  return Semantics(
+    label: 'icon',
+    child: HugeIcon(
+     icon: data,
+     size: size,
+     color: color,
+     strokeWidth: strokeWidth,
+    ),
   );
  }
 }
