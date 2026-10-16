@@ -5,7 +5,7 @@ import 'app.dart';
 import 'core/format.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await initFormats();
-  runApp(const ProviderScope(child: OkoumeApp()));
+ WidgetsFlutterBinding.ensureInitialized();
+ await initFormats();
+ runApp(const ProviderScope(child: OkoumeApp()));
 }

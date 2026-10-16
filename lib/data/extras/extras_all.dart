@@ -8,10 +8,10 @@ import 'extras_v.dart';
 
 /// Fusion des aperçus de tous les modules (177 écrans hors MVP).
 final Map<String, ExtraSpec> allExtraSpecs = {
-  ...extraSpecsC,
-  ...extraSpecsA,
-  ...extraSpecsV,
-  ...extraSpecsL,
-  ...extraSpecsAd1,
-  ...extraSpecsAd2,
+ ...extraSpecsC,
+ ...extraSpecsA,
+ ...extraSpecsV,
+ ...extraSpecsL,
+ ...extraSpecsAd1,
+ ...extraSpecsAd2,
 };
