@@ -110,6 +110,7 @@ class AppIcon extends StatelessWidget {
   this.size,
   this.color,
   this.strokeWidth = 1.8,
+  this.semanticLabel,
  });
 
  final AppIconData? icon;
@@ -118,6 +119,7 @@ class AppIcon extends StatelessWidget {
 
  /// Épaisseur de trait (les icônes stroke sont plus fines que Material).
  final double? strokeWidth;
+ final String? semanticLabel;
 
  @override
  Widget build(BuildContext context) {
@@ -126,7 +128,7 @@ class AppIcon extends StatelessWidget {
    return SizedBox(width: size ?? 24, height: size ?? 24);
   }
   return Semantics(
-    label: 'icon',
+    label: semanticLabel ?? 'icon',
     child: HugeIcon(
      icon: data,
      size: size,

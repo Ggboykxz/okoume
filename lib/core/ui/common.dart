@@ -500,6 +500,7 @@ class AppTextField extends StatelessWidget {
   this.hint,
   this.icon,
   this.suffix,
+  this.errorText,
   this.onChanged,
   this.onSubmitted,
   this.keyboardType,
@@ -523,16 +524,24 @@ class AppTextField extends StatelessWidget {
  final bool autofocus;
  final bool readOnly;
  final VoidCallback? onTap;
+ final String? errorText;
  final TextCapitalization textCapitalization;
 
  @override
  Widget build(BuildContext context) {
+  final h = (hint ?? '').toLowerCase();
+  final effectiveType = keyboardType ??
+      ((h.contains('tél') || h.contains('telephone') || h.contains('phone'))
+        ? TextInputType.phone
+        : (h.contains('montant') || h.contains('prix') || h.contains('quantit') || h.contains('stock') || h.contains('frais')) ? TextInputType.number : null);
+  final effectiveObscure = obscure ||
+      h.contains('mot de passe') || h.contains('password') || h.contains('code') || h.contains('otp') || h.contains('nip');
   return TextField(
    controller: controller,
    onChanged: onChanged,
    onSubmitted: onSubmitted,
-   keyboardType: keyboardType,
-   obscureText: obscure,
+   keyboardType: effectiveType,
+   obscureText: effectiveObscure,
    maxLines: maxLines,
    autofocus: autofocus,
    readOnly: readOnly,
@@ -541,6 +550,7 @@ class AppTextField extends StatelessWidget {
    style: const TextStyle(fontSize: 14.5, fontWeight: FontWeight.w500),
    decoration: InputDecoration(
     hintText: hint,
+    errorText: errorText,
     prefixIcon: icon == null
       ? null
       : AppIcon(icon, size: 20, color: Theme.of(context).colorScheme.onSurfaceVariant),
