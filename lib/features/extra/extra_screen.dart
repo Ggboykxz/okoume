@@ -228,7 +228,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
    borderRadius: BorderRadius.circular(18),
    ),
    alignment: Alignment.center,
-   child: Text(spec.emoji.isNotEmpty ? spec.emoji : '•', style: const TextStyle(fontSize: 27)),
+   child: Text(spec.emoji.isNotEmpty ? spec.emoji : '•', style: const TextStyle(fontSize: 16)),
   ),
   const SizedBox(width: 13),
   Expanded(

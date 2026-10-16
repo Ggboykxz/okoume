@@ -46,7 +46,7 @@ Future<void> showReceiptSheet(BuildContext context, Order order) {
     Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-     Text(line.emoji.isNotEmpty ? line.emoji : '•', style: const TextStyle(fontSize: 17)),
+     Text(line.emoji.isNotEmpty ? line.emoji : '•', style: const TextStyle(fontSize: 16)),
      const SizedBox(width: 9),
      Expanded(
      child: Column(

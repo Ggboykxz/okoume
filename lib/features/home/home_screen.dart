@@ -457,7 +457,7 @@ class _StoriesStrip extends StatelessWidget {
     shape: BoxShape.circle,
     ),
     alignment: Alignment.center,
-    child: Text(p.emoji.isNotEmpty ? p.emoji : '•', style: const TextStyle(fontSize: 26)),
+    child: Text(p.emoji.isNotEmpty ? p.emoji : '•', style: const TextStyle(fontSize: 16)),
    ),
    );
   },
@@ -614,7 +614,7 @@ class _CategoryTile extends StatelessWidget {
     borderRadius: BorderRadius.circular(16),
    ),
    alignment: Alignment.center,
-   child: Text(category.emoji.isNotEmpty ? category.emoji : '•', style: const TextStyle(fontSize: 24)),
+   child: Text(category.emoji.isNotEmpty ? category.emoji : '•', style: const TextStyle(fontSize: 16)),
    ),
    const SizedBox(height: 6),
    Text(

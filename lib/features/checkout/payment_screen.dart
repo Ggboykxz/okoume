@@ -117,7 +117,7 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
          shape: BoxShape.circle,
         ),
         alignment: Alignment.center,
-        child: Text(method.emoji.isNotEmpty ? method.emoji : '•', style: const TextStyle(fontSize: 40)),
+        child: Text(method.emoji.isNotEmpty ? method.emoji : '•', style: const TextStyle(fontSize: 16)),
        ),
        const SizedBox(height: 22),
        Text(

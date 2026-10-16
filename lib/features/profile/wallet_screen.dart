@@ -323,7 +323,7 @@ class _TxnRow extends StatelessWidget {
    borderRadius: BorderRadius.circular(12),
    ),
    alignment: Alignment.center,
-   child: Text(txn.emoji.isNotEmpty ? txn.emoji : '•', style: const TextStyle(fontSize: 17)),
+   child: Text(txn.emoji.isNotEmpty ? txn.emoji : '•', style: const TextStyle(fontSize: 16)),
   ),
   const SizedBox(width: 12),
   Expanded(

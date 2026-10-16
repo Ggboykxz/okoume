@@ -705,7 +705,7 @@ class _MethodCard extends StatelessWidget {
     ),
     alignment: Alignment.center,
     child:
-     Text(method.emoji.isNotEmpty ? method.emoji : '•', style: const TextStyle(fontSize: 20)),
+     Text(method.emoji.isNotEmpty ? method.emoji : '•', style: const TextStyle(fontSize: 16)),
    ),
    const SizedBox(width: 12),
    Expanded(

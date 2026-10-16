@@ -170,7 +170,7 @@ class LockersScreen extends StatelessWidget {
    children: [
    Row(
     children: [
-    Text(locker.emoji.isNotEmpty ? locker.emoji : '•', style: const TextStyle(fontSize: 26)),
+    Text(locker.emoji.isNotEmpty ? locker.emoji : '•', style: const TextStyle(fontSize: 16)),
     const SizedBox(width: 10),
     Expanded(
      child: Text(
@@ -283,7 +283,7 @@ class _LockerCard extends StatelessWidget {
     ),
     alignment: Alignment.center,
     child:
-     Text(locker.emoji.isNotEmpty ? locker.emoji : '•', style: const TextStyle(fontSize: 22)),
+     Text(locker.emoji.isNotEmpty ? locker.emoji : '•', style: const TextStyle(fontSize: 16)),
     ),
     const SizedBox(width: 12),
     Expanded(

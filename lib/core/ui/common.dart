@@ -799,7 +799,7 @@ class AppListTile extends StatelessWidget {
        ),
        alignment: Alignment.center,
        child: emoji != null
-         ? Text(emoji!, style: const TextStyle(fontSize: 18))
+         ? Text(emoji!, style: const TextStyle(fontSize: 16))
          : AppIcon(icon, size: 19, color: iconColor ?? cs.primary),
       ),
       const SizedBox(width: 12),
