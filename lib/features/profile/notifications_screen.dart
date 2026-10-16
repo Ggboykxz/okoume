@@ -38,7 +38,7 @@ class NotificationsScreen extends ConsumerWidget {
          'Suivi de commande, promos et messages : tout arrive ici.',
       )
      : ListView.separated(
-       padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
        itemCount: notifications.length,
        separatorBuilder: (_, _) => const SizedBox(height: 10),
        itemBuilder: (context, i) {

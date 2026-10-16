@@ -124,10 +124,10 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
     ],
    ),
    body: ListView(
-    padding: const EdgeInsets.only(bottom: 24),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
     children: [
      Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 6),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 6),
       child: StepBar(
        steps: const ['Photo', 'Détails', 'Publié'],
        current: _step,
@@ -146,7 +146,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
     child: SafeArea(
      top: false,
      child: Padding(
-      padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
       child: Row(
        children: [
         if (_step > 0)
@@ -185,7 +185,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
  List<Widget> _photoStep(ColorScheme cs) {
   return [
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
     child: Center(
      child: SizedBox(
       width: 190,
@@ -251,7 +251,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
  List<Widget> _detailsStep(ColorScheme cs) {
   return [
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
     child: Row(
      children: [
       SizedBox(
@@ -313,7 +313,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
     onChanged: (v) => setState(() => _express = v),
    ),
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
     child: InfoBanner(
      emoji: '',
      color: AppColors.success,
@@ -330,7 +330,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
       0;
   return [
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 12, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: Text('Aperçu de votre annonce',
       style: Theme.of(context).textTheme.titleMedium),
    ),

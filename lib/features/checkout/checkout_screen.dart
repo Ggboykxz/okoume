@@ -97,10 +97,10 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   ),
   ),
   body: ListView(
-  padding: const EdgeInsets.only(bottom: 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    Padding(
-   padding: const EdgeInsets.fromLTRB(20, 12, 20, 6),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 6),
    child: StepBar(
     steps: const ['Livraison', 'Paiement', 'Confirmation'],
     current: _step,
@@ -120,7 +120,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   child: SafeArea(
    top: false,
    child: Padding(
-   padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
    child: _step == 0
     ? AppButton(
      label: 'Continuer vers le paiement',
@@ -245,7 +245,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   ),
   for (final mode in DeliveryMode.values)
   Padding(
-   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: _OptionCard(
    emoji: mode.emoji.isNotEmpty ? mode.emoji : '•',
    title: mode.label,
@@ -271,7 +271,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   ),
   if (_mode != DeliveryMode.retraitVendeur) ...[
   Padding(
-   padding: const EdgeInsets.fromLTRB(20, 12, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: Text('Vitesse de livraison',
     style: Theme.of(context).textTheme.titleMedium),
   ),
@@ -300,7 +300,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   ],
   if (_mode == DeliveryMode.pointRelais) ...[
   Padding(
-   padding: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
    child: AppButton(
    label: 'Choisir une consigne de retrait',
    variant: AppButtonVariant.outline,
@@ -340,18 +340,18 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
    crossAxisAlignment: CrossAxisAlignment.start,
    children: [
    Padding(
-    padding: const EdgeInsets.fromLTRB(22, 0, 22, 12),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 12),
     child: Text('Choisir une adresse',
      style: Theme.of(context).textTheme.titleMedium),
    ),
    Flexible(
     child: ListView(
     shrinkWrap: true,
-    padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 8),
     children: [
      for (final a in addresses)
      Padding(
-      padding: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
       child: AppListTile(
       emoji: '',
       title:
@@ -371,7 +371,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     ),
    ),
    Padding(
-    padding: const EdgeInsets.fromLTRB(22, 4, 22, 20),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 20),
     child: AppButton(
     label: 'Ajouter une adresse',
     icon: AppIcons.add_location_alt_rounded,
@@ -396,7 +396,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
  showAppSheet(
   context,
   Padding(
-  padding: const EdgeInsets.fromLTRB(22, 0, 22, 22),
+  padding: const EdgeInsets.fromLTRB(22, 16, 22, 22),
   child: Column(
    mainAxisSize: MainAxisSize.min,
    crossAxisAlignment: CrossAxisAlignment.start,
@@ -490,7 +490,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
   const SizedBox(height: 12),
   for (final method in PaymentMethod.values)
   Padding(
-   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: _MethodCard(
    method: method,
    selected: _method == method,

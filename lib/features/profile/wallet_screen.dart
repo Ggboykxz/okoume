@@ -20,7 +20,7 @@ class WalletScreen extends ConsumerWidget {
  return Scaffold(
   appBar: AppBar(title: const Text('Portefeuille Okoumé')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    // ------------------------------------------------------- Solde
    Container(
@@ -240,7 +240,7 @@ class WalletScreen extends ConsumerWidget {
   builder: (context, setSheetState) {
    final cs = Theme.of(context).colorScheme;
    return Padding(
-   padding: const EdgeInsets.fromLTRB(22, 0, 22, 24),
+   padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
    child: Column(
     mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.start,

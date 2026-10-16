@@ -20,7 +20,7 @@ class LivreurWalletScreen extends ConsumerWidget {
  return Scaffold(
   appBar: AppBar(title: const Text('Mes gains')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    // -------------------------------------------------------- Solde
    Container(
@@ -186,7 +186,7 @@ class LivreurWalletScreen extends ConsumerWidget {
    else
    for (final course in state.history)
     Padding(
-    padding: const EdgeInsets.only(bottom: 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: AppCard(
      padding: const EdgeInsets.all(13),
      child: Row(
@@ -255,7 +255,7 @@ class LivreurWalletScreen extends ConsumerWidget {
     .toList();
    if (amount > wallet) amount = wallet;
    return Padding(
-   padding: const EdgeInsets.fromLTRB(22, 0, 22, 24),
+   padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
    child: Column(
     mainAxisSize: MainAxisSize.min,
     crossAxisAlignment: CrossAxisAlignment.start,

@@ -155,7 +155,7 @@ class _LivreurJoinScreenState extends ConsumerState<LivreurJoinScreen> {
   bottom: PreferredSize(
    preferredSize: const Size.fromHeight(34),
    child: Padding(
-   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: StepBar(steps: _labels, current: _step),
    ),
   ),
@@ -184,7 +184,7 @@ class _LivreurJoinScreenState extends ConsumerState<LivreurJoinScreen> {
     ),
    ),
    Padding(
-    padding: const EdgeInsets.fromLTRB(22, 0, 22, 16),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 16),
     child: Column(
     children: [
      AppButton(
@@ -605,7 +605,7 @@ class _LivreurJoinScreenState extends ConsumerState<LivreurJoinScreen> {
     const SizedBox(height: 10),
     for (var c = 0; c < _quiz[q].$2.length; c++)
      Padding(
-     padding: const EdgeInsets.only(bottom: 8),
+     padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
      child: Pressable(
       scale: 0.99,
       child: GestureDetector(

@@ -175,7 +175,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
   ],
   ),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    // ------------------------------------------------ Carte illustrée
    Container(

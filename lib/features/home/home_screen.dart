@@ -72,11 +72,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
    onRefresh: () => Future.delayed(const Duration(milliseconds: 700)),
    child: MotionEnter(
    child: ListView(
-   padding: const EdgeInsets.only(bottom: 28),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
    children: [
     // ------------------------------------------------------- En-tête
     Padding(
-    padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
     child: Row(
      children: [
      Expanded(

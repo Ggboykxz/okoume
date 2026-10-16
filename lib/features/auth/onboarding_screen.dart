@@ -157,7 +157,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     ),
    ),
    Padding(
-    padding: const EdgeInsets.fromLTRB(32, 0, 32, 28),
+    padding: const EdgeInsets.fromLTRB(32, 16, 32, 28),
     child: Column(
     children: [
      Row(

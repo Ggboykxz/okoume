@@ -70,7 +70,7 @@ class _ScreensIndexScreenState extends ConsumerState<ScreensIndexScreen> {
   body: Column(
   children: [
    Padding(
-   padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+   padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
    child: AppCard(
     padding: const EdgeInsets.all(14),
     child: Column(
@@ -138,7 +138,7 @@ class _ScreensIndexScreenState extends ConsumerState<ScreensIndexScreen> {
    ),
    ),
    Padding(
-   padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+   padding: const EdgeInsets.fromLTRB(16, 16, 16, 10),
    child: AppTextField(
     controller: _query,
     hint: 'Rechercher (ex. AD-42, avis, KYC…)',
@@ -154,7 +154,7 @@ class _ScreensIndexScreenState extends ConsumerState<ScreensIndexScreen> {
      message: 'Essayez un autre identifiant ou mot-clé.',
      )
     : ListView.builder(
-     padding: const EdgeInsets.fromLTRB(16, 0, 16, 30),
+     padding: const EdgeInsets.fromLTRB(16, 16, 16, 30),
      itemCount: items.length,
      itemBuilder: (context, i) {
       final item = items[i];
@@ -183,7 +183,7 @@ class _ScreensIndexScreenState extends ConsumerState<ScreensIndexScreen> {
  Widget _row(BuildContext context, ScreenEntry e) {
  final route = e.route ?? '/screen/${e.id}';
  return Padding(
-  padding: const EdgeInsets.only(bottom: 8),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
   child: AppListTile(
   icon: e.isPreview
    ? AppIcons.visibility_rounded

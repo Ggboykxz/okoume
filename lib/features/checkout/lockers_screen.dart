@@ -77,7 +77,7 @@ class LockersScreen extends StatelessWidget {
  return Scaffold(
   appBar: AppBar(title: const Text('Consignes de retrait ')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    const InfoBanner(
    emoji: '',
@@ -163,7 +163,7 @@ class LockersScreen extends StatelessWidget {
  showAppSheet(
   context,
   Padding(
-  padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 20),
   child: Column(
    mainAxisSize: MainAxisSize.min,
    crossAxisAlignment: CrossAxisAlignment.start,

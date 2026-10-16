@@ -123,7 +123,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
   ],
   ),
   body: ListView(
-  padding: const EdgeInsets.only(bottom: 130),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 130),
   children: [
    // ------------------------------------------------------- Galerie
    SizedBox(
@@ -135,7 +135,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
      itemCount: 3,
      onPageChanged: (i) => setState(() => _galleryIndex = i),
      itemBuilder: (context, i) => Padding(
-     padding: const EdgeInsets.fromLTRB(20, 4, 20, 0),
+     padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
      child: ProductArt(
       emoji: product.emoji.isNotEmpty ? product.emoji : '•',
       seed: product.seed + i * 3,
@@ -175,7 +175,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
    ),
 
    Padding(
-   padding: const EdgeInsets.fromLTRB(20, 14, 20, 0),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
    child: Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -513,7 +513,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
    const SizedBox(height: 12),
    for (final review in reviews.take(3))
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: AppCard(
     child: Column(
      crossAxisAlignment: CrossAxisAlignment.start,
@@ -570,7 +570,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
    ),
    for (final qa in qas)
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: AppCard(
     child: Column(
      crossAxisAlignment: CrossAxisAlignment.start,
@@ -617,7 +617,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
    if (similar.isNotEmpty) ...[
    const SizedBox(height: 12),
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
     child: Text('Produits similaires',
      style: Theme.of(context).textTheme.titleMedium),
    ),
@@ -647,7 +647,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
   child: SafeArea(
    top: false,
    child: Padding(
-   padding: const EdgeInsets.fromLTRB(16, 12, 16, 12),
+   padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
    child: Row(
     children: [
     GestureDetector(
@@ -704,7 +704,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
  showAppSheet(
   context,
   Padding(
-  padding: const EdgeInsets.fromLTRB(22, 0, 22, 20),
+  padding: const EdgeInsets.fromLTRB(22, 16, 22, 20),
   child: Column(
    mainAxisSize: MainAxisSize.min,
    crossAxisAlignment: CrossAxisAlignment.start,

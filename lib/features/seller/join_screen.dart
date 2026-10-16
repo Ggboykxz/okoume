@@ -114,7 +114,7 @@ class _SellerJoinScreenState extends ConsumerState<SellerJoinScreen> {
   bottom: PreferredSize(
    preferredSize: const Size.fromHeight(34),
    child: Padding(
-   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: StepBar(steps: _labels, current: _step),
    ),
   ),
@@ -143,7 +143,7 @@ class _SellerJoinScreenState extends ConsumerState<SellerJoinScreen> {
     ),
    ),
    Padding(
-    padding: const EdgeInsets.fromLTRB(22, 0, 22, 16),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 16),
     child: Column(
     children: [
      AppButton(

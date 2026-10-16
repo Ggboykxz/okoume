@@ -96,7 +96,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     onAction: () => context.go('/main'),
    )
    : ListView(
-    padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
     children: [
     // ------------------------------------------ Groupes vendeur
     for (final entry in groups.entries)
@@ -247,7 +247,7 @@ class _CartScreenState extends ConsumerState<CartScreen> {
     child: SafeArea(
     top: false,
     child: Padding(
-     padding: const EdgeInsets.fromLTRB(20, 12, 20, 12),
+     padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
      child: AppButton(
      label: 'Passer la commande ${formatXaf(totals.total)}',
      icon: AppIcons.lock_rounded,
@@ -272,7 +272,7 @@ class _SellerGroup extends ConsumerWidget {
  final seller = ref.watch(sellerByIdProvider(sellerId));
 
  return Padding(
-  padding: const EdgeInsets.only(bottom: 14),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 14),
   child: AppCard(
   padding: const EdgeInsets.all(14),
   child: Column(

@@ -42,7 +42,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
    height: 58,
    child: ListView(
     scrollDirection: Axis.horizontal,
-    padding: const EdgeInsets.fromLTRB(20, 14, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     children: [
     AppChip(
      label: 'En cours (${active.length})',
@@ -89,7 +89,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
      onAction: _tab == 0 ? () => context.go('/main') : null,
      )
     : ListView.separated(
-     padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+     padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
      itemCount: list.length,
      separatorBuilder: (_, _) => const SizedBox(height: 12),
      itemBuilder: (context, i) => _OrderCard(order: list[i]),
@@ -97,7 +97,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
    ),
    if (_tab == 0 && active.isNotEmpty)
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 0, 20, 4),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 4),
     child: Text(
     'Astuce : ouvrez une commande pour simuler l\'avancement de la livraison (démo).',
     textAlign: TextAlign.center,

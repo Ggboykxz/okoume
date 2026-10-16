@@ -159,7 +159,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
    children: [
    Expanded(
     child: ListView(
-    padding: const EdgeInsets.fromLTRB(22, 12, 22, 20),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 20),
     children: [
      // ---------------------------------------------------- V-17 Photos
      Text('Photos du produit',
@@ -346,7 +346,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
     ),
    ),
    Padding(
-    padding: const EdgeInsets.fromLTRB(22, 0, 22, 16),
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 16),
     child: Column(
     children: [
      AppButton(
@@ -395,7 +395,7 @@ class _ToggleRow extends StatelessWidget {
  Widget build(BuildContext context) {
  final cs = Theme.of(context).colorScheme;
  return Container(
-  padding: const EdgeInsets.fromLTRB(14, 10, 6, 10),
+  padding: const EdgeInsets.fromLTRB(14, 16, 6, 10),
   decoration: BoxDecoration(
   color: cs.surface,
   borderRadius: BorderRadius.circular(16),

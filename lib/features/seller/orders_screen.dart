@@ -34,7 +34,7 @@ class _SellerOrdersScreenState extends ConsumerState<SellerOrdersScreen> {
    height: 58,
    child: ListView(
     scrollDirection: Axis.horizontal,
-    padding: const EdgeInsets.fromLTRB(20, 14, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     children: [
     AppChip(
      label: 'À traiter (${toProcess.length})',
@@ -64,7 +64,7 @@ class _SellerOrdersScreenState extends ConsumerState<SellerOrdersScreen> {
       : 'Vos premières ventes apparaîtront ici dès qu\'un acheteur commandera.',
      )
     : ListView.separated(
-     padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+     padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
      itemCount: list.length,
      separatorBuilder: (_, _) => const SizedBox(height: 12),
      itemBuilder: (context, i) =>
@@ -73,7 +73,7 @@ class _SellerOrdersScreenState extends ConsumerState<SellerOrdersScreen> {
    ),
    if (list.isNotEmpty)
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 0, 20, 4),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 4),
     child: Text(
     'Les fonds sont libérés automatiquement 24 h après la livraison confirmée.',
     textAlign: TextAlign.center,

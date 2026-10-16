@@ -35,7 +35,7 @@ class SellerDashboardScreen extends ConsumerWidget {
   ],
   ),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    // ------------------------------------------------------ Bandeau
    Container(
@@ -245,7 +245,7 @@ class SellerDashboardScreen extends ConsumerWidget {
    else
    for (final order in toProcess.take(3))
     Padding(
-    padding: const EdgeInsets.only(bottom: 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: AppCard(
      padding: const EdgeInsets.all(13),
      child: Row(

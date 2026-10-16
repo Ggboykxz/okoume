@@ -103,7 +103,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   ),
   body: SafeArea(
   child: ListView(
-   padding: const EdgeInsets.fromLTRB(24, 14, 24, 28),
+   padding: const EdgeInsets.fromLTRB(24, 16, 24, 28),
    children: [
    Text('Code SMS ',
     style: Theme.of(context).textTheme.headlineSmall),

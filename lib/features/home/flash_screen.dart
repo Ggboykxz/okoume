@@ -32,7 +32,7 @@ class FlashSalesScreen extends ConsumerWidget {
      'Les offres flash reviennent chaque jour. Revenez demain !',
    )
    : ListView(
-    padding: const EdgeInsets.fromLTRB(20, 6, 20, 28),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
     children: [
     MotionEnter(
      child: Container(

@@ -38,7 +38,7 @@ class _PermissionsScreenState extends ConsumerState<PermissionsScreen> {
   bottom: PreferredSize(
    preferredSize: const Size.fromHeight(34),
    child: Padding(
-   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: StepBar(
     steps: const ['Profil', 'Zone', 'Notifs'],
     current: 2,
@@ -152,7 +152,7 @@ class _PermissionTile extends StatelessWidget {
  Widget build(BuildContext context) {
  final cs = Theme.of(context).colorScheme;
  return Container(
-  padding: const EdgeInsets.fromLTRB(14, 12, 8, 12),
+  padding: const EdgeInsets.fromLTRB(14, 16, 8, 12),
   decoration: BoxDecoration(
   color: cs.surface,
   borderRadius: BorderRadius.circular(16),

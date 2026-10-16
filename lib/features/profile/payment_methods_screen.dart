@@ -22,11 +22,11 @@ class PaymentMethodsScreen extends ConsumerWidget {
  return Scaffold(
   appBar: AppBar(title: const Text('Moyens de paiement')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    for (final method in PaymentMethod.values)
    Padding(
-    padding: const EdgeInsets.only(bottom: 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: AppListTile(
     emoji: method.emoji.isNotEmpty ? method.emoji : '•',
     iconColor: method.color,
@@ -73,7 +73,7 @@ class PaymentMethodsScreen extends ConsumerWidget {
  showAppSheet(
   context,
   Padding(
-  padding: const EdgeInsets.fromLTRB(22, 0, 22, 24),
+  padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
   child: Column(
    mainAxisSize: MainAxisSize.min,
    crossAxisAlignment: CrossAxisAlignment.start,

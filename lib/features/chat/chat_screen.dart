@@ -205,13 +205,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
      )
     : ListView.builder(
      reverse: true,
-     padding: const EdgeInsets.fromLTRB(16, 14, 16, 8),
+     padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
      itemCount: thread.messages.length + 1,
      itemBuilder: (context, i) {
       if (i == thread.messages.length) {
       // Bandeau escrow en haut de conversation.
       return Padding(
-       padding: const EdgeInsets.only(bottom: 12),
+       padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
        child: InfoBanner(
        emoji: '',
        text:
@@ -240,7 +240,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
      height: 46,
      child: ListView(
       scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.fromLTRB(14, 8, 14, 0),
+      padding: const EdgeInsets.fromLTRB(14, 16, 14, 0),
       children: [
       for (final reply in _quickReplies)
        Padding(
@@ -257,7 +257,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
      ),
      ),
      Padding(
-     padding: const EdgeInsets.fromLTRB(12, 8, 12, 10),
+     padding: const EdgeInsets.fromLTRB(12, 16, 12, 10),
      child: Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -349,8 +349,8 @@ class _Bubble extends StatelessWidget {
   child: Container(
   constraints: BoxConstraints(
    maxWidth: MediaQuery.sizeOf(context).width * 0.76),
-  margin: const EdgeInsets.only(bottom: 10),
-  padding: const EdgeInsets.fromLTRB(14, 10, 14, 8),
+  margin: const EdgeInsets.fromLTRB(20, 16, 20, 10),
+  padding: const EdgeInsets.fromLTRB(14, 16, 14, 8),
   decoration: BoxDecoration(
    color: bg,
    borderRadius: BorderRadius.only(
@@ -368,7 +368,7 @@ class _Bubble extends StatelessWidget {
    children: [
    if (isOffer)
     Padding(
-    padding: const EdgeInsets.only(bottom: 6),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 6),
     child: Row(
      mainAxisSize: MainAxisSize.min,
      children: [

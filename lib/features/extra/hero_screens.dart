@@ -720,7 +720,7 @@ class ScanPickupScreen extends StatelessWidget {
      showAppSheet(
      context,
      Padding(
-      padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
       child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -886,7 +886,7 @@ class _LiveShoppingScreenState extends State<LiveShoppingScreen> {
    child: Column(
     children: [
     Padding(
-     padding: const EdgeInsets.fromLTRB(14, 8, 14, 0),
+     padding: const EdgeInsets.fromLTRB(14, 16, 14, 0),
      child: Row(
      children: [
       Container(
@@ -930,13 +930,13 @@ class _LiveShoppingScreenState extends State<LiveShoppingScreen> {
     ),
     const Spacer(),
     Padding(
-     padding: const EdgeInsets.fromLTRB(14, 0, 14, 10),
+     padding: const EdgeInsets.fromLTRB(14, 16, 14, 10),
      child: Column(
      crossAxisAlignment: CrossAxisAlignment.start,
      children: [
       for (var i = 0; i < _shown; i++)
       Padding(
-       padding: const EdgeInsets.only(bottom: 6),
+       padding: const EdgeInsets.fromLTRB(20, 16, 20, 6),
        child: Row(
        children: [
         Text(_pool[i].$1,
@@ -1109,7 +1109,7 @@ class CourierMapScreen extends ConsumerWidget {
    const SizedBox(height: 10),
    for (final c in _courses)
    Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
     child: AppListTile(
     emoji: c.$1,
     title: c.$2,

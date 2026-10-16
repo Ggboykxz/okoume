@@ -130,7 +130,7 @@ class _StoriesScreenState extends ConsumerState<StoriesScreen>
     children: [
      // ----------------------------------- Progression segmentée
      Padding(
-     padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+     padding: const EdgeInsets.fromLTRB(10, 16, 10, 0),
      child: Row(
       children: [
       for (var i = 0; i < stories.length; i++)

@@ -21,7 +21,7 @@ class SettingsScreen extends ConsumerWidget {
  return Scaffold(
   appBar: AppBar(title: const Text('Paramètres')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    // ----------------------------------------------------- Apparence
    _SectionLabel('Apparence'),
@@ -277,7 +277,7 @@ class _NotificationSettingsScreenState
  return Scaffold(
   appBar: AppBar(title: const Text('Notifications')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    for (final entry in [
    ('', 'Suivi de commandes',
@@ -336,7 +336,7 @@ class _DataSettingsScreenState extends ConsumerState<DataSettingsScreen> {
  return Scaffold(
   appBar: AppBar(title: const Text('Données et stockage')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    AppCard(
    child: Row(
@@ -461,7 +461,7 @@ class _SwitchRow extends StatelessWidget {
  Widget build(BuildContext context) {
  final cs = Theme.of(context).colorScheme;
  return Container(
-  padding: const EdgeInsets.fromLTRB(14, 10, 6, 10),
+  padding: const EdgeInsets.fromLTRB(14, 16, 6, 10),
   decoration: BoxDecoration(
   color: cs.surface,
   borderRadius: BorderRadius.circular(16),

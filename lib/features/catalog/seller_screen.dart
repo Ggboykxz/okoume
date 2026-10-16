@@ -32,11 +32,11 @@ class _SellerScreenState extends ConsumerState<SellerScreen> {
  return Scaffold(
   appBar: AppBar(title: Text(seller.name)),
   body: ListView(
-  padding: const EdgeInsets.only(bottom: 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    // ------------------------------------------------------ Bandeau
    Padding(
-   padding: const EdgeInsets.fromLTRB(20, 6, 20, 0),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
    child: Container(
     padding: const EdgeInsets.all(18),
     decoration: BoxDecoration(

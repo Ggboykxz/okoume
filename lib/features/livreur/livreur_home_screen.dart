@@ -31,7 +31,7 @@ class LivreurHomeScreen extends ConsumerWidget {
   ],
   ),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    // ---------------------------------------------------- Statut en ligne
    Container(
@@ -245,7 +245,7 @@ class LivreurHomeScreen extends ConsumerWidget {
    else
    for (final course in state.available)
     Padding(
-    padding: const EdgeInsets.only(bottom: 12),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 12),
     child: _CourseCard(
      course: course,
      onAccept: () {

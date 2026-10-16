@@ -63,7 +63,7 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
   bottom: PreferredSize(
    preferredSize: const Size.fromHeight(34),
    child: Padding(
-   padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
    child: StepBar(
     steps: const ['Profil', 'Zone', 'Notifs'],
     current: 0,

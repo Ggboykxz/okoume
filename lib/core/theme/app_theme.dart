@@ -124,9 +124,11 @@ abstract final class AppTheme {
     backgroundColor: dark ? AppColors.darkBackground : cs.surface,
     foregroundColor: cs.onSurface,
     elevation: 0,
-    scrolledUnderElevation: 0,
+    scrolledUnderElevation: 2,
     surfaceTintColor: Colors.transparent,
     centerTitle: false,
+    toolbarHeight: 64,
+    titleSpacing: 16,
     titleTextStyle: TextStyle(
      fontFamily: poppins,
      fontWeight: FontWeight.w700,

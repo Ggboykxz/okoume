@@ -122,7 +122,7 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
   context,
   StatefulBuilder(
   builder: (context, setSheetState) => SingleChildScrollView(
-   padding: const EdgeInsets.fromLTRB(22, 0, 22, 24),
+   padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
    child: Column(
    crossAxisAlignment: CrossAxisAlignment.start,
    mainAxisSize: MainAxisSize.min,
@@ -215,7 +215,7 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
   ],
   ),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 10, 20, 26),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 26),
   children: [
    // -------------------------------------------------------- Statut
    Row(

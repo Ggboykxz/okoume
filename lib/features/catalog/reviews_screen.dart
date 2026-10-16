@@ -56,7 +56,7 @@ class _ProductReviewsScreenState extends ConsumerState<ProductReviewsScreen> {
   label: const Text('Donner mon avis'),
   ),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 96),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 96),
   children: [
    // ------------------------------------------------------ Résumé note
    MotionEnter(
@@ -162,7 +162,7 @@ class _ProductReviewsScreenState extends ConsumerState<ProductReviewsScreen> {
   context,
   StatefulBuilder(
   builder: (context, setSheetState) => SingleChildScrollView(
-   padding: const EdgeInsets.fromLTRB(22, 0, 22, 24),
+   padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
    child: Column(
    crossAxisAlignment: CrossAxisAlignment.start,
    mainAxisSize: MainAxisSize.min,

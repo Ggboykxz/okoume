@@ -93,7 +93,7 @@ class _HelpScreenState extends ConsumerState<HelpScreen> {
  return Scaffold(
   appBar: AppBar(title: const Text('Centre d\'aide')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 8, 20, 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    // ---------------------------------------------------- Recherche FAQ
    AppTextField(
@@ -135,7 +135,7 @@ class _HelpScreenState extends ConsumerState<HelpScreen> {
      iconColor: cs.primary,
      collapsedIconColor: cs.onSurfaceVariant,
      childrenPadding:
-      const EdgeInsets.fromLTRB(16, 0, 16, 14),
+      const EdgeInsets.fromLTRB(16, 16, 16, 14),
      expandedCrossAxisAlignment: CrossAxisAlignment.start,
      children: [
       Text(

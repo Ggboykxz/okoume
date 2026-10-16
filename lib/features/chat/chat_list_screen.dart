@@ -45,7 +45,7 @@ class ChatListScreen extends ConsumerWidget {
          'Contactez un vendeur depuis une fiche produit pour négocier ou poser une question.',
       )
      : ListView.separated(
-       padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
        itemCount: sorted.length,
        separatorBuilder: (_, _) => const SizedBox(height: 10),
        itemBuilder: (context, i) {

@@ -157,7 +157,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
  return Scaffold(
   appBar: AppBar(title: Text(spec.title)),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(16, 10, 16, 36),
+  padding: const EdgeInsets.fromLTRB(16, 16, 16, 36),
   children: [
    MotionEnter(order: order++, child: _header(cs, entry, spec)),
    const SizedBox(height: 14),
@@ -302,7 +302,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
     const SizedBox(height: 8),
     for (final b in s.bullets)
     Padding(
-     padding: const EdgeInsets.only(bottom: 7),
+     padding: const EdgeInsets.fromLTRB(20, 16, 20, 7),
      child: Row(
      crossAxisAlignment: CrossAxisAlignment.start,
      children: [
@@ -332,7 +332,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
    if (s.title != null) _sectionTitle(s.title!),
    for (final row in s.items)
     Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
     child: AppListTile(
      emoji: row.emoji.isNotEmpty ? row.emoji : '•',
      title: row.title,
@@ -362,7 +362,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
    _sectionTitle(s.title),
    for (final row in s.items)
     Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
     child: AppListTile(
      emoji: row.emoji.isNotEmpty ? row.emoji : '•',
      title: row.title,
@@ -494,7 +494,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
    if (s.title != null) _sectionTitle(s.title!),
    for (var i = 0; i < s.items.length; i++)
     Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
     child: Container(
      padding: const EdgeInsets.symmetric(
       horizontal: 14, vertical: 4),
@@ -536,7 +536,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
  }
 
  Widget _sectionTitle(String title) => Padding(
-  padding: const EdgeInsets.fromLTRB(2, 4, 2, 10),
+  padding: const EdgeInsets.fromLTRB(2, 16, 2, 10),
   child: Text(title, style: Theme.of(context).textTheme.titleMedium),
   );
 
@@ -546,7 +546,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
   final chunk = s.stats.sublist(
    i, i + 3 > s.stats.length ? s.stats.length : i + 3);
   rows.add(Padding(
-  padding: const EdgeInsets.only(bottom: 8),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
   child: IntrinsicHeight(
    child: Row(
    crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -664,7 +664,7 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
   else
    for (final item in items)
    Padding(
-    padding: const EdgeInsets.only(bottom: 8),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
     child: AppListTile(
     emoji: item.$1,
     title: item.$2,

@@ -57,7 +57,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
    children: [
    // ------------------------------------------------------ En-tête
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 14, 20, 4),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 4),
     child: Row(
     children: [
      Expanded(
@@ -83,7 +83,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
    ),
    // ------------------------------------------------- Barre de saisie
    Padding(
-    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     child: Row(
     children: [
      Expanded(
@@ -128,7 +128,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       children: [
       Padding(
        padding:
-        const EdgeInsets.fromLTRB(20, 6, 20, 10),
+        const EdgeInsets.fromLTRB(20, 16, 20, 10),
        child: Row(
        children: [
         Expanded(
@@ -196,7 +196,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
  Widget _buildLanding(ColorScheme cs) {
  return ListView(
-  padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
   const SizedBox(height: 6),
   Text('Recherches récentes',
@@ -247,7 +247,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   const SizedBox(height: 10),
   for (final c in Mock.categories)
    Padding(
-   padding: const EdgeInsets.only(bottom: 8),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
    child: AppListTile(
     emoji: c.emoji.isNotEmpty ? c.emoji : '•',
     iconColor: c.color,
@@ -273,7 +273,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   crossAxisAlignment: CrossAxisAlignment.start,
   children: [
    Padding(
-   padding: const EdgeInsets.fromLTRB(22, 4, 22, 10),
+   padding: const EdgeInsets.fromLTRB(22, 16, 22, 10),
    child: Text('Trier par',
     style: Theme.of(context).textTheme.titleMedium),
    ),
@@ -313,7 +313,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
   final cities = ref.watch(citiesProvider);
   final cs = Theme.of(context).colorScheme;
   return SingleChildScrollView(
-   padding: const EdgeInsets.fromLTRB(22, 4, 22, 24),
+   padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
    child: Column(
    crossAxisAlignment: CrossAxisAlignment.start,
    children: [

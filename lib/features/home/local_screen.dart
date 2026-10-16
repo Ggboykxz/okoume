@@ -29,7 +29,7 @@ class LocalProductsScreen extends ConsumerWidget {
  return Scaffold(
   appBar: AppBar(title: const Text('Made in Gabon ')),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(20, 4, 20, 28),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
   children: [
    MotionEnter(
    child: Container(

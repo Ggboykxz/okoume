@@ -41,7 +41,7 @@ class _SellerFinanceScreenState extends ConsumerState<SellerFinanceScreen> {
   return Scaffold(
    appBar: AppBar(title: const Text('Revenus & retraits')),
    body: ListView(
-    padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
     children: [
      // -------------------------------------------------------- Solde
      Container(
@@ -247,7 +247,7 @@ class _SellerFinanceScreenState extends ConsumerState<SellerFinanceScreen> {
        .toList();
      if (amount > _balance) amount = _balance;
      return Padding(
-      padding: const EdgeInsets.fromLTRB(22, 0, 22, 24),
+      padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
       child: Column(
        mainAxisSize: MainAxisSize.min,
        crossAxisAlignment: CrossAxisAlignment.start,

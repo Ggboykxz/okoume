@@ -48,11 +48,11 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
  return Scaffold(
   appBar: AppBar(title: Text(category.name)),
   body: ListView(
-  padding: const EdgeInsets.only(bottom: 24),
+  padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
   children: [
    // ----------------------------------------------------- Bandeau
    Padding(
-   padding: const EdgeInsets.fromLTRB(20, 6, 20, 0),
+   padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
    child: Container(
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
@@ -113,7 +113,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
    height: 58,
    child: ListView.separated(
     scrollDirection: Axis.horizontal,
-    padding: const EdgeInsets.fromLTRB(20, 14, 20, 10),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 10),
     itemCount: _quickLabels.length,
     separatorBuilder: (_, _) => const SizedBox(width: 8),
     itemBuilder: (context, i) => AppChip(
@@ -141,7 +141,7 @@ class _CategoryScreenState extends ConsumerState<CategoryScreen> {
     crossAxisCount: 2,
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
-    padding: const EdgeInsets.fromLTRB(20, 8, 20, 0),
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 0),
     mainAxisSpacing: 18,
     crossAxisSpacing: 14,
     childAspectRatio: 0.62,

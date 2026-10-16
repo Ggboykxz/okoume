@@ -198,7 +198,7 @@ class LegalScreen extends StatelessWidget {
   title: Text(_isTerms ? 'Conditions générales' : 'Confidentialité'),
   ),
   body: ListView(
-  padding: const EdgeInsets.fromLTRB(22, 10, 22, 32),
+  padding: const EdgeInsets.fromLTRB(22, 16, 22, 32),
   children: [
    Text(
    _isTerms

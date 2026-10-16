@@ -12,7 +12,7 @@ Future<void> showReceiptSheet(BuildContext context, Order order) {
  return showAppSheet(
  context,
  Padding(
-  padding: const EdgeInsets.fromLTRB(18, 0, 18, 14),
+  padding: const EdgeInsets.fromLTRB(18, 16, 18, 14),
   child: Column(
    mainAxisSize: MainAxisSize.min,
    crossAxisAlignment: CrossAxisAlignment.start,

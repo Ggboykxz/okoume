@@ -32,7 +32,7 @@ class WishlistScreen extends ConsumerWidget {
        onAction: () => context.go('/main'),
       )
      : ListView(
-       padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
        children: [
         GridView.count(
          crossAxisCount: 2,
