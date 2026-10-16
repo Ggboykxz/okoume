@@ -124,17 +124,7 @@ class _StoriesScreenState extends ConsumerState<StoriesScreen>
     ),
     ),
    ),
-   Positioned(
-    right: -40,
-    top: 120,
-    child: Text(
-    story.emoji.isNotEmpty ? story.emoji : '•',
-    style: TextStyle(
-     fontSize: 220,
-     color: Colors.white.withValues(alpha: 0.16),
-    ),
-    ),
-   ),
+   
    SafeArea(
     child: Column(
     children: [

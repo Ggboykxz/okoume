@@ -89,10 +89,16 @@ class ProductArt extends StatelessWidget {
          ),
         ),
         Center(
-         child: Text(
-          emoji,
-          style: TextStyle(fontSize: side * emojiScale),
-         ),
+         child: emoji.trim().isNotEmpty
+          ? Text(
+             emoji,
+             style: TextStyle(fontSize: side * emojiScale),
+            )
+          : AppIcon(
+             AppIcons.inventory_2_rounded,
+             size: side * emojiScale,
+             color: Colors.white.withValues(alpha: 0.9),
+            ),
         ),
         if (ribbon != null)
          Positioned(

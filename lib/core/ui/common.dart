@@ -798,9 +798,12 @@ class AppListTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
        ),
        alignment: Alignment.center,
-       child: emoji != null
-         ? Text(emoji!, style: const TextStyle(fontSize: 16))
-         : AppIcon(icon, size: 19, color: iconColor ?? cs.primary),
+       child: (emoji != null && emoji!.trim().isNotEmpty)
+         ? Text(emoji!.trim(), style: const TextStyle(fontSize: 16))
+         : AppIcon(
+             icon ?? AppIcons.circle_outlined,
+             size: 19,
+             color: iconColor ?? cs.primary),
       ),
       const SizedBox(width: 12),
       Expanded(
