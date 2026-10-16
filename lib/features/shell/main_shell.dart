@@ -175,15 +175,20 @@ class _MainShellState extends ConsumerState<MainShell> {
     children: [
      for (var i = 0; i < tabs.length; i++)
      Expanded(
-      child: _NavItem(
-      spec: tabs[i],
-      selected: i == _index,
-      special: tabs[i].label == 'Vendre',
-      onTap: () {
-       AppMotion.tap();
-       shellTabNotifier.value = i;
-       setState(() => _index = i);
-      },
+      child: Semantics(
+       label: tabs[i].label,
+       selected: i == _index,
+       button: true,
+       child: _NavItem(
+        spec: tabs[i],
+        selected: i == _index,
+        special: tabs[i].label == 'Vendre',
+        onTap: () {
+         AppMotion.tap();
+         shellTabNotifier.value = i;
+         setState(() => _index = i);
+        },
+       ),
       ),
      ),
     ],
