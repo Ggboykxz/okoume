@@ -98,7 +98,7 @@ class _MainShellState extends ConsumerState<MainShell> {
  if (_index >= tabs.length) _index = tabs.length - 1;
  if (_index < 0) _index = 0;
  final online = ref.watch(settingsProvider).online;
- final isTablet = MediaQuery.sizeOf(context).width >= 600;
+ final isTablet = MediaQuery.sizeOf(context).width >= 900;
 
  if (isTablet) {
   return Scaffold(
