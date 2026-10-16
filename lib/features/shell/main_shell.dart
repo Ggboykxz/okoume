@@ -188,26 +188,15 @@ class _NavItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Transform.translate(
-              offset: const Offset(0, -10),
+              offset: const Offset(0, -8),
               child: Container(
-                width: 48,
-                height: 48,
+                width: 46,
+                height: 46,
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFFF8A3D), Color(0xFFFF6B00)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                  borderRadius: BorderRadius.circular(16),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFFFF6B00).withValues(alpha: 0.38),
-                      blurRadius: 14,
-                      offset: const Offset(0, 6),
-                    ),
-                  ],
+                  color: const Color(0xFFFF6B00),
+                  borderRadius: BorderRadius.circular(14),
                 ),
-                child: AppIcon(spec.icon, color: Colors.white, size: 26),
+                child: AppIcon(spec.icon, color: Colors.white, size: 24),
               ),
             ),
             Transform.translate(
@@ -216,7 +205,7 @@ class _NavItem extends StatelessWidget {
                 spec.label,
                 style: const TextStyle(
                   fontSize: 10.5,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w700,
                   color: Color(0xFFFF6B00),
                 ),
               ),

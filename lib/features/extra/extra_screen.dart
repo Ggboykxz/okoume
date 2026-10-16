@@ -164,10 +164,9 @@ class _ExtraScreenState extends ConsumerState<ExtraScreen> {
           MotionEnter(
             order: order++,
             child: InfoBanner(
-              emoji: '🟢',
-              text: 'Démo locale fonctionnelle (sans serveur) : chaque action '
-                  'modifie réellement l’état de l’application et persiste '
-                  'pendant la session. Référence CDC — '
+              emoji: '•',
+              text: 'Démo locale fonctionnelle — chaque action modifie '
+                  "l’état de l’application pendant la session. Réf. CDC — "
                   '${entry.id} · ${entry.title}.',
             ),
           ),
