@@ -98,6 +98,40 @@ class _MainShellState extends ConsumerState<MainShell> {
  if (_index >= tabs.length) _index = tabs.length - 1;
  if (_index < 0) _index = 0;
  final online = ref.watch(settingsProvider).online;
+ final isTablet = MediaQuery.sizeOf(context).width >= 600;
+
+ if (isTablet) {
+  return Scaffold(
+   body: Row(
+    children: [
+     NavigationRail(
+      selectedIndex: _index,
+      onDestinationSelected: (i) {
+       AppMotion.tap();
+       shellTabNotifier.value = i;
+       setState(() => _index = i);
+      },
+      leading: Padding(
+       padding: const EdgeInsets.only(top: 8.0),
+       child: const Text('Okoumé',
+        style: TextStyle(fontWeight: FontWeight.w800)),
+      ),
+      labelType: NavigationRailLabelType.all,
+      destinations: [
+       for (final t in tabs)
+        NavigationRailDestination(
+         icon: AppIcon(t.icon, color: cs.onSurfaceVariant),
+         selectedIcon: AppIcon(t.icon, color: cs.primary),
+         label: Text(t.label),
+        ),
+      ],
+     ),
+     const VerticalDivider(thickness: 1, width: 1),
+     Expanded(child: IndexedStack(index: _index, children: [for (final t in tabs) t.page])),
+    ],
+   ),
+  );
+ }
 
  return Scaffold(
   body: Column(
