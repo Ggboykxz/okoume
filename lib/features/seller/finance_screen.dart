@@ -33,7 +33,7 @@ class _SellerFinanceScreenState extends ConsumerState<SellerFinanceScreen> {
    _Payout('Retrait vers Airtel Money', -50000,
      DateTime.now().subtract(const Duration(days: 1)), ''),
    _Payout('Vente — Montre connectée GT', 27500,
-     DateTime.now().subtract(const Duration(days: 2)), '⌚'),
+     DateTime.now().subtract(const Duration(days: 2)), ''),
    _Payout('Vente — Chargeur rapide 65W', 6500,
      DateTime.now().subtract(const Duration(days: 3)), ''),
   ];

@@ -610,7 +610,7 @@ void main() {
   await tester.pumpAndSettle();
   expect(find.textContaining('Analytics Vente'), findsOneWidget);
 
-  await tester.tap(find.textContaining('V-10 · Analytics Vente'));
+  await tester.tap(find.textContaining('V-10 — Analytics Vente'));
   await tester.pumpAndSettle();
   expect(find.text('CA du mois'), findsOneWidget);
   expect(find.textContaining('Démo locale fonctionnelle'), findsOneWidget);

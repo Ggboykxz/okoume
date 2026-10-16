@@ -7,7 +7,7 @@
 class ScreenEntry {
  const ScreenEntry(this.id, this.title, this.desc, {this.route});
 
- /// Identifiant officiel (ex. « C-13 », « AD-42 »).
+ /// Identifiant officiel (ex. C-13 , AD-42 ).
  final String id;
 
  /// Titre exact du CDC.
@@ -34,7 +34,7 @@ const screenModuleLabels = <String, String>{
 };
 
 const screenModuleEmojis = <String, String>{
- 'C': '️',
+ 'C': '',
  'A': '',
  'V': '',
  'L': '',
@@ -45,61 +45,61 @@ const screenModuleEmojis = <String, String>{
 String screenGroupOf(ScreenEntry e) {
  final n = e.number;
  return switch (e.module) {
-  'C' => n <= 15
-    ? 'Onboarding & Authentification'
-    : n <= 36
-      ? 'Profil Utilisateur'
-      : n <= 40
-        ? 'Notifications & Messages'
-        : 'Recherche Globale',
-  'A' => n <= 14
-    ? 'Home & Découverte'
-    : n <= 32
-      ? 'Produit & Décision d\u2019Achat'
-      : n <= 45
-        ? 'Panier, Commande & Chat'
-        : n <= 54
-          ? 'Paiement'
-          : n <= 65
-            ? 'Suivi de Commande'
-            : 'Points de Retrait & Lockers',
-  'V' => n <= 13
-    ? 'Onboarding & Dashboard'
-    : n <= 27
-      ? 'Gestion Catalogue'
-      : n <= 38
-        ? 'Vente Rapide & Social Commerce'
-        : n <= 54
-          ? 'Gestion Commandes'
-          : n <= 60
-            ? 'Livraison Vendeur'
-            : n <= 72
-              ? 'Finances Vendeur'
-              : 'Boutique & Profil Public',
-  'L' => n <= 13
-    ? 'Onboarding & Dashboard'
-    : n <= 29
-      ? 'Gestion des Courses'
-      : n <= 35
-        ? 'Communication & Support'
-        : n <= 41
-          ? 'Finances Livreur'
-          : 'Paramètres Livreur',
-  _ => n <= 7
-    ? 'Dashboard & Analytics'
-    : n <= 20
-      ? 'Gestion Utilisateurs'
-      : n <= 29
-        ? 'Gestion Catalogue'
-        : n <= 41
-          ? 'Commandes & Transactions'
-          : n <= 48
-            ? 'Gestion Livraisons'
-            : n <= 57
-              ? 'Marketing & Communication'
-              : n <= 66
-                ? 'Support & Modération'
-                : 'Paramètres Système',
+ 'C' => n <= 15
+  ? 'Onboarding & Authentification'
+  : n <= 36
+   ? 'Profil Utilisateur'
+   : n <= 40
+    ? 'Notifications & Messages'
+    : 'Recherche Globale',
+ 'A' => n <= 14
+  ? 'Home & Découverte'
+  : n <= 32
+   ? 'Produit & Décision d\u2019Achat'
+   : n <= 45
+    ? 'Panier, Commande & Chat'
+    : n <= 54
+     ? 'Paiement'
+     : n <= 65
+      ? 'Suivi de Commande'
+      : 'Points de Retrait & Lockers',
+ 'V' => n <= 13
+  ? 'Onboarding & Dashboard'
+  : n <= 27
+   ? 'Gestion Catalogue'
+   : n <= 38
+    ? 'Vente Rapide & Social Commerce'
+    : n <= 54
+     ? 'Gestion Commandes'
+     : n <= 60
+      ? 'Livraison Vendeur'
+      : n <= 72
+       ? 'Finances Vendeur'
+       : 'Boutique & Profil Public',
+ 'L' => n <= 13
+  ? 'Onboarding & Dashboard'
+  : n <= 29
+   ? 'Gestion des Courses'
+   : n <= 35
+    ? 'Communication & Support'
+    : n <= 41
+     ? 'Finances Livreur'
+     : 'Paramètres Livreur',
+ _ => n <= 7
+  ? 'Dashboard & Analytics'
+  : n <= 20
+   ? 'Gestion Utilisateurs'
+   : n <= 29
+    ? 'Gestion Catalogue'
+    : n <= 41
+     ? 'Commandes & Transactions'
+     : n <= 48
+      ? 'Gestion Livraisons'
+      : n <= 57
+       ? 'Marketing & Communication'
+       : n <= 66
+        ? 'Support & Modération'
+        : 'Paramètres Système',
  };
 }
 
@@ -165,7 +165,7 @@ const screenCatalog = <ScreenEntry>[
  ScreenEntry('A-11', 'Boutique Vendeur', 'Page publique d\u2019une boutique', route: '/seller/s2'),
  ScreenEntry('A-12', 'Flash Sales', 'Ventes flash avec compte à rebours', route: '/flash'),
  ScreenEntry('A-13', 'Événements Spéciaux', 'Black Friday, Noël, Fête du Travail'),
- ScreenEntry('A-14', 'Produits Locaux', '« Made in Gabon » — artisanat local', route: '/local'),
+ ScreenEntry('A-14', 'Produits Locaux', ' Made in Gabon — artisanat local', route: '/local'),
  ScreenEntry('A-15', 'Fiche Produit', 'Photos, prix, description, avis, vendeur', route: '/product/p1'),
  ScreenEntry('A-16', 'Galerie Photos', 'Visionneuse plein écran HD', route: '/product/p1/gallery'),
  ScreenEntry('A-17', 'Lecteur Vidéo', 'Vidéo produit plein écran'),
@@ -264,7 +264,7 @@ const screenCatalog = <ScreenEntry>[
  ScreenEntry('V-39', 'Commandes Reçues', 'Liste toutes les commandes', route: '/main'),
  ScreenEntry('V-40', 'Détail Commande Reçue', 'Infos complètes client + produits', route: '/main'),
  ScreenEntry('V-41', 'Confirmer Commande', 'Accepter la commande', route: '/main'),
- ScreenEntry('V-42', 'Préparer Commande', 'Marquer « en préparation »', route: '/main'),
+ ScreenEntry('V-42', 'Préparer Commande', 'Marquer en préparation ', route: '/main'),
  ScreenEntry('V-43', 'Imprimer Bon Livraison', 'Génération PDF'),
  ScreenEntry('V-44', 'Demander Livreur', 'Matching livreur disponible'),
  ScreenEntry('V-45', 'Marquer Expédiée', 'Commande prête, livreur assigné', route: '/main'),

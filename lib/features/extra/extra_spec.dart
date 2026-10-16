@@ -1,4 +1,4 @@
-/// Modèles des écrans « catalogue » Okoumé.
+/// Modèles des écrans catalogue Okoumé.
 ///
 /// Les 317 écrans du CDC sont couverts : ceux du MVP ont une vraie route, les
 /// autres sont rendus par `/screen/:id` à partir d'une [ExtraSpec]. Tous sont
@@ -9,58 +9,58 @@ library;
 
 /// Opération réelle déclenchée par une action ou un formulaire (état local).
 enum ExtraOp {
- /// AD-11 · valider le premier dossier KYC de la file.
+ /// AD-11 valider le premier dossier KYC de la file.
  kycApprove,
 
- /// AD-12 · rejeter le premier dossier KYC (motif = 1er champ).
+ /// AD-12 rejeter le premier dossier KYC (motif = 1er champ).
  kycReject,
 
- /// AD-39/AD-41 · approuver le premier retrait (target : vendeur/livreur).
+ /// AD-39/AD-41 approuver le premier retrait (target : vendeur/livreur).
  withdrawalApprove,
 
- /// AD-33 · trancher le premier litige (sens = 1er champ).
+ /// AD-33 trancher le premier litige (sens = 1er champ).
  disputeDecide,
 
- /// AD-54 · créer un code promo (champs : code, type, min, validité).
+ /// AD-54 créer un code promo (champs : code, type, min, validité).
  createPromo,
 
- /// V-60 · créer une zone (champs : nom, frais, délai).
+ /// V-60 créer une zone (champs : nom, frais, délai).
  createZone,
 
- /// AD-26 · créer une catégorie (champs : nom, emoji, couleur, attributs).
+ /// AD-26 créer une catégorie (champs : nom, emoji, couleur, attributs).
  createCategory,
 
- /// AD-29 · programmer une bannière (champs : titre, dates, ciblage, lien).
+ /// AD-29 programmer une bannière (champs : titre, dates, ciblage, lien).
  createBanner,
 
- /// AD-50 · programmer une campagne push (champs : titre, message, cible, envoi).
+ /// AD-50 programmer une campagne push (champs : titre, message, cible, envoi).
  createCampaign,
 
- /// AD-75 · créer un compte admin (champs : nom, tél, email, rôle).
+ /// AD-75 créer un compte admin (champs : nom, tél, email, rôle).
  createAdmin,
 
- /// AD-65 · publier un article d'aide (champs : titre, catégorie, contenu, liens).
+ /// AD-65 publier un article d'aide (champs : titre, catégorie, contenu, liens).
  createFaq,
 
- /// V-25 · programmer une promotion vendeur (champs : produit, %, dates).
+ /// V-25 programmer une promotion vendeur (champs : produit, %, dates).
  createVendorPromo,
 
- /// V-20 · mettre à jour un stock (champs : produit, quantité, seuil).
+ /// V-20 mettre à jour un stock (champs : produit, quantité, seuil).
  updateStock,
 
- /// AD-63 · trancher le premier contenu signalé (justification = 1er champ).
+ /// AD-63 trancher le premier contenu signalé (justification = 1er champ).
  moderateContent,
 
- /// AD-60 · répondre au premier ticket support (message = 1er champ).
+ /// AD-60 répondre au premier ticket support (message = 1er champ).
  replyTicket,
 
- /// A-60 · ouvrir un dossier de remboursement (commande = 1er champ).
+ /// A-60 ouvrir un dossier de remboursement (commande = 1er champ).
  openRefund,
 
- /// AD-07/AD-57 · générer un rapport (type = 1er champ).
+ /// AD-07/AD-57 générer un rapport (type = 1er champ).
  generateReport,
 
- /// AD-71 · basculer le mode maintenance.
+ /// AD-71 basculer le mode maintenance.
  toggleMaintenance,
 }
 
@@ -124,9 +124,9 @@ class StatSection extends ExtraSection {
 /// Rendu d'une liste vivante (état applicatif réel, partagé entre écrans).
 class DynamicSection extends ExtraSection {
  const DynamicSection(
-  this.kind, {
-  this.title,
-  this.emptyText = 'Rien pour le moment — vos actions apparaîtront ici.',
+ this.kind, {
+ this.title,
+ this.emptyText = 'Rien pour le moment — vos actions apparaîtront ici.',
  });
 
  final DynamicKind kind;
@@ -137,12 +137,12 @@ class DynamicSection extends ExtraSection {
 /// Ligne de liste cliquable.
 class ExtraRow {
  const ExtraRow(
-  this.emoji,
-  this.title, {
-  this.subtitle,
-  this.trailing,
-  this.snack,
-  this.route,
+ this.emoji,
+ this.title, {
+ this.subtitle,
+ this.trailing,
+ this.snack,
+ this.route,
  });
 
  final String emoji;
@@ -196,13 +196,13 @@ class ChartSection extends ExtraSection {
 /// ([FormSection.op]) est appliquée à l'état réel).
 class FormSection extends ExtraSection {
  const FormSection({
-  required this.title,
-  required this.fields,
-  this.submitLabel = 'Valider',
-  this.success = 'Enregistré ',
-  this.op,
-  this.opArity,
-  this.target,
+ required this.title,
+ required this.fields,
+ this.submitLabel = 'Valider',
+ this.success = 'Enregistré ',
+ this.op,
+ this.opArity,
+ this.target,
  });
 
  final String title;
@@ -214,7 +214,7 @@ class FormSection extends ExtraSection {
  /// Nombre de champs transmis à l'opération (les suivants sont optionnels).
  final int? opArity;
 
- /// Cible éventuelle de l'opération (ex. « vendeur » / « livreur »).
+ /// Cible éventuelle de l'opération (ex. vendeur / livreur ).
  final String? target;
 }
 
@@ -235,12 +235,12 @@ class ToggleSection extends ExtraSection {
 /// Bouton d'action : navigation réelle, opération réelle ou journal local.
 class ExtraAction {
  const ExtraAction(
-  this.emoji,
-  this.label, {
-  this.snack,
-  this.route,
-  this.op,
-  this.target,
+ this.emoji,
+ this.label, {
+ this.snack,
+ this.route,
+ this.op,
+ this.target,
  });
 
  final String emoji;
@@ -254,11 +254,11 @@ class ExtraAction {
 /// Spécification complète d'un écran du catalogue.
 class ExtraSpec {
  const ExtraSpec({
-  required this.emoji,
-  required this.title,
-  required this.tagline,
-  this.sections = const [],
-  this.actions = const [],
+ required this.emoji,
+ required this.title,
+ required this.tagline,
+ this.sections = const [],
+ this.actions = const [],
  });
 
  final String emoji;

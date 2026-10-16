@@ -26,7 +26,7 @@ class AppButton extends StatelessWidget {
   this.icon,
   this.loading = false,
   this.expanded = true,
-  this.height = 52,
+  this.height = 48,
   this.small = false,
  });
 
@@ -110,7 +110,8 @@ class AppButton extends StatelessWidget {
    ),
   );
 
-  return expanded ? SizedBox(width: double.infinity, child: button) : button;
+  final result = expanded ? SizedBox(width: double.infinity, child: button) : button;
+ return Semantics(button: true, label: label, enabled: enabled, child: result);
  }
 }
 
@@ -120,7 +121,7 @@ class AppIconButton extends StatelessWidget {
   required this.icon,
   this.onTap,
   this.badgeCount = 0,
-  this.size = 42,
+  this.size = 48,
   this.onArt = false,
   this.backgroundColor,
   this.iconColor,
@@ -781,7 +782,7 @@ class AppListTile extends StatelessWidget {
    child: GestureDetector(
    onTap: onTap,
    child: Container(
-    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
     decoration: BoxDecoration(
      color: cs.surface,
      borderRadius: BorderRadius.circular(16),

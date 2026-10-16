@@ -26,9 +26,9 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
   '',
   '',
   '',
-  '️',
-  '⌚',
-  '️',
+  '',
+  '',
+  '',
   '',
   '',
   '',
@@ -62,7 +62,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
     int.tryParse(_priceController.text.replaceAll(RegExp(r'[^0-9]'), ''));
   if (title.length < 3) {
    showAppSnack(context, 'Donnez un titre clair à votre annonce',
-     emoji: '️');
+     emoji: '');
    return;
   }
   if (price == null || price <= 0) {
@@ -315,7 +315,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
    Padding(
     padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
     child: InfoBanner(
-     emoji: '️',
+     emoji: '',
      color: AppColors.success,
      text:
        'Vendeur vérifié : paiement escrow automatique, aucune démarche à faire.',
@@ -398,7 +398,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
    Padding(
     padding: const EdgeInsets.symmetric(horizontal: 20),
     child: InfoBanner(
-     emoji: '⏱',
+     emoji: '',
      color: cs.secondary,
      text:
        'Démo : la publication est instantanée. En production, l\'annonce est en ligne en moins de 60 secondes.',

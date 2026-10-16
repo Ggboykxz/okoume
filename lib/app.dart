@@ -14,6 +14,14 @@ class OkoumeApp extends ConsumerWidget {
   final router = ref.watch(routerProvider);
   final settings = ref.watch(settingsProvider);
   return MaterialApp.router(
+   builder: (context, child) {
+     final mq = MediaQuery.of(context);
+     final scale = mq.textScaler.scale(1).clamp(0.85, 1.4);
+     return MediaQuery(
+       data: mq.copyWith(textScaler: TextScaler.linear(scale)),
+       child: child ?? const SizedBox.shrink(),
+     );
+   },
    title: 'Okoumé — Tout le Gabon, dans ma poche',
    debugShowCheckedModeBanner: false,
    theme: AppTheme.light(),

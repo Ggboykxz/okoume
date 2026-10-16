@@ -7,6 +7,7 @@ import 'app_colors.dart';
 abstract final class AppTheme {
  static const poppins = 'Poppins';
  static const montserrat = 'Montserrat';
+  static const inter = 'Inter';
 
  // --------------------------------------------------------------------- Clair
  static ColorScheme _lightScheme() => const ColorScheme.light(
@@ -94,13 +95,13 @@ abstract final class AppTheme {
       fontFamily: poppins, fontWeight: FontWeight.w600, fontSize: 16, height: 1.3, letterSpacing: -0.15),
     titleSmall: TextStyle(
       fontFamily: poppins, fontWeight: FontWeight.w600, fontSize: 14, height: 1.3, letterSpacing: -0.1),
-    bodyLarge: TextStyle(fontSize: 16, height: 1.45),
-    bodyMedium: TextStyle(fontSize: 14, height: 1.45),
-    bodySmall: TextStyle(fontSize: 12, height: 1.4),
+    bodyLarge: TextStyle(fontFamily: AppTheme.inter, fontSize: 16, height: 1.45),
+    bodyMedium: TextStyle(fontFamily: AppTheme.inter, fontSize: 14, height: 1.45),
+    bodySmall: TextStyle(fontFamily: AppTheme.inter, fontSize: 12, height: 1.4),
     labelLarge: TextStyle(
       fontFamily: poppins, fontWeight: FontWeight.w600, fontSize: 14, height: 1.2, letterSpacing: 0.1),
     labelMedium: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, height: 1.3, letterSpacing: 0.15),
-    labelSmall: TextStyle(fontSize: 11, fontWeight: FontWeight.w500, height: 1.3, letterSpacing: 0.2),
+    labelSmall: TextStyle(fontFamily: AppTheme.inter, fontSize: 11, fontWeight: FontWeight.w500, height: 1.3, letterSpacing: 0.2),
    );
 
  // --------------------------------------------------------------------- Base
