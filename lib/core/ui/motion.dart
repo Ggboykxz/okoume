@@ -157,7 +157,7 @@ class MotionEnter extends StatelessWidget {
  Widget build(BuildContext context) {
  if (!AppMotion.on(context)) return child;
  return child
-  .animate(delay: Duration(milliseconds: 70 * order))
+  .animate(delay: Duration(milliseconds: 70 * (order > 6 ? 6 : order)))
   .fadeIn(
    duration: const Duration(milliseconds: 320),
    curve: Curves.easeOutCubic,

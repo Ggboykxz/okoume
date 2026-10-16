@@ -787,7 +787,10 @@ class AppListTile extends StatelessWidget {
  Widget build(BuildContext context) {
   final cs = Theme.of(context).colorScheme;
   final fg = danger ? AppColors.danger : cs.onSurface;
-  return Pressable(
+  return Semantics(
+   label: title,
+   button: onTap != null,
+   child: Pressable(
    enabled: onTap != null,
    scale: 0.98,
    child: GestureDetector(
@@ -840,7 +843,8 @@ class AppListTile extends StatelessWidget {
     ),
    ),
    ),
-  );
+  ),
+ );
  }
 }
 
@@ -863,7 +867,9 @@ class EmptyState extends StatelessWidget {
  @override
  Widget build(BuildContext context) {
   final cs = Theme.of(context).colorScheme;
-  return Center(
+  return Semantics(
+   label: title,
+   child: Center(
    child: Padding(
     padding: const EdgeInsets.all(32),
     child: Column(
@@ -904,7 +910,8 @@ class EmptyState extends StatelessWidget {
      ],
     ),
    ),
-  );
+  ),
+ );
  }
 }
 
