@@ -698,14 +698,14 @@ class AppCard extends StatelessWidget {
 class InfoBanner extends StatelessWidget {
  const InfoBanner({
   super.key,
-  required this.emoji,
+  this.emoji,
   required this.text,
   this.color,
   this.onTap,
   this.trailing,
  });
 
- final String emoji;
+ final String? emoji;
  final String text;
  final Color? color;
  final VoidCallback? onTap;
@@ -729,8 +729,9 @@ class InfoBanner extends StatelessWidget {
     ),
     child: Row(
      children: [
-      Text(emoji, style: const TextStyle(fontSize: 18)),
-      const SizedBox(width: 10),
+      if (emoji != null)
+        Text(emoji!, style: const TextStyle(fontSize: 18)),
+      if (emoji != null) const SizedBox(width: 10),
       Expanded(
        child: Text(
         text,
@@ -836,14 +837,14 @@ class AppListTile extends StatelessWidget {
 class EmptyState extends StatelessWidget {
  const EmptyState({
   super.key,
-  required this.emoji,
+  this.emoji,
   required this.title,
   this.message,
   this.actionLabel,
   this.onAction,
  });
 
- final String emoji;
+ final String? emoji;
  final String title;
  final String? message;
  final String? actionLabel;
@@ -866,7 +867,9 @@ class EmptyState extends StatelessWidget {
         shape: BoxShape.circle,
        ),
        alignment: Alignment.center,
-       child: Text(emoji, style: const TextStyle(fontSize: 42)),
+       child: (emoji != null && emoji!.trim().isNotEmpty)
+          ? Text(emoji!, style: const TextStyle(fontSize: 30))
+          : AppIcon(AppIcons.circle_outlined, size: 38, color: cs.onSurfaceVariant),
       ),
       const SizedBox(height: 18),
       Text(title,
