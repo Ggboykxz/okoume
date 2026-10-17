@@ -225,21 +225,12 @@ class LivreurHomeScreen extends ConsumerWidget {
     ),
    )
    else if (state.available.isEmpty)
-   AppCard(
-    child: Row(
-    children: [
-     const Text('', style: TextStyle(fontSize: 24)),
-     const SizedBox(width: 12),
-     Expanded(
-     child: Text(
-      'Aucune course pour le moment. Restez en ligne, les demandes arrivent vite !',
-      style: TextStyle(
-       fontSize: 12.5,
-       height: 1.4,
-       color: cs.onSurfaceVariant),
-     ),
-     ),
-    ],
+   Padding(
+    padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+    child: EmptyState(
+     emoji: '🛵',
+     title: 'Aucune course pour le moment',
+     message: 'Restez en ligne, les demandes arrivent vite !',
     ),
    )
    else

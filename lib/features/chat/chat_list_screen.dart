@@ -38,11 +38,13 @@ class ChatListScreen extends ConsumerWidget {
     ],
    ),
    body: sorted.isEmpty
-     ? const EmptyState(
+     ? EmptyState(
        emoji: '',
        title: 'Aucune conversation',
        message:
          'Contactez un vendeur depuis une fiche produit pour négocier ou poser une question.',
+       actionLabel: 'Explorer le catalogue',
+       onAction: () => context.go('/main'),
       )
      : ListView.separated(
        padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
