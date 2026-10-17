@@ -470,6 +470,7 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
      ),
      ),
      AppIconButton(
+     label: 'Appeler le livreur',
      icon: AppIcons.call_rounded,
      size: 40,
      onTap: () => showAppSnack(
@@ -477,6 +478,7 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
      ),
      const SizedBox(width: 8),
      AppIconButton(
+     label: 'Écrire au livreur',
      icon: AppIcons.chat_bubble_rounded,
      size: 40,
      onTap: () => showAppSnack(

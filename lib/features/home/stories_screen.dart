@@ -124,7 +124,17 @@ class _StoriesScreenState extends ConsumerState<StoriesScreen>
     ),
     ),
    ),
-   
+   Positioned.fill(
+    child: DecoratedBox(
+     decoration: BoxDecoration(
+      gradient: LinearGradient(
+       colors: [Colors.transparent, Colors.black.withValues(alpha: 0.55)],
+       begin: Alignment.topCenter,
+       end: Alignment.bottomCenter,
+      ),
+     ),
+    ),
+   ),
    SafeArea(
     child: Column(
     children: [
@@ -203,8 +213,9 @@ class _StoriesScreenState extends ConsumerState<StoriesScreen>
        child: GestureDetector(
        onTap: () => context.pop(),
        child: Container(
-        width: 34,
-        height: 34,
+        width: 44,
+        height: 44,
+        padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.22),
         shape: BoxShape.circle,

@@ -110,18 +110,19 @@ class _ProfileSetupScreenState extends ConsumerState<ProfileSetupScreen> {
         emoji: '',
         ),
         child: Container(
-        width: 32,
-        height: 32,
+        width: 44,
+        height: 44,
+        padding: const EdgeInsets.all(6),
         decoration: BoxDecoration(
          color: cs.primary,
          shape: BoxShape.circle,
          border: Border.all(
           color: cs.surface, width: 2.5),
         ),
-        child: const AppIcon(
+        child: AppIcon(
          AppIcons.photo_camera_rounded,
          size: 15,
-         color: Colors.white),
+         color: cs.onPrimary),
         ),
        ),
        ),

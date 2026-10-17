@@ -5,6 +5,7 @@ import '../../theme/app_colors.dart';
 import '../../theme/app_theme.dart';
 import '../../format.dart';
 import '../app_icons.dart';
+import '../motion.dart';
 import './cards.dart';
 
 // ================================================================ Divers
@@ -101,7 +102,9 @@ class BarChartMini extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     AnimatedContainer(
-                      duration: const Duration(milliseconds: 500),
+                      duration: AppMotion.on(context)
+                          ? const Duration(milliseconds: 500)
+                          : Duration.zero,
                       curve: Curves.easeOutCubic,
                       height: (values[i] / maxValue) * 82 + 8,
                       decoration: BoxDecoration(
@@ -165,14 +168,15 @@ class StepBar extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: i < current
-                    ? const AppIcon(AppIcons.check_rounded,
-                        size: 15, color: Colors.white)
+                    ? AppIcon(AppIcons.check_rounded,
+                        size: 15, color: cs.onPrimary)
                     : Text(
                         '${i + 1}',
                         style: TextStyle(
                           fontSize: 12.5,
                           fontWeight: FontWeight.w800,
-                          color: i <= current ? Colors.white : cs.onSurfaceVariant,
+                          color:
+                              i <= current ? cs.onPrimary : cs.onSurfaceVariant,
                         ),
                       ),
               ),
@@ -242,7 +246,7 @@ class _CountdownTextState extends State<CountdownText> {
         style: TextStyle(
           fontSize: widget.size,
           fontWeight: FontWeight.w800,
-          color: AppColors.danger,
+          color: AppColors.onTintDanger,
           fontFeatures: const [FontFeature.tabularFigures()],
         ),
       ),

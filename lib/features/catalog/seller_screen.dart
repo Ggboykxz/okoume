@@ -155,6 +155,7 @@ class _SellerScreenState extends ConsumerState<SellerScreen> {
       ),
       const SizedBox(width: 10),
       AppIconButton(
+      label: 'Partager la boutique',
       icon: AppIcons.ios_share_rounded,
       size: 44,
       onTap: () => showAppSnack(

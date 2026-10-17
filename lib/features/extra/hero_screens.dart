@@ -920,6 +920,7 @@ class _LiveShoppingScreenState extends State<LiveShoppingScreen> {
       ),
       const Spacer(),
       AppIconButton(
+      label: 'Fermer',
       icon: AppIcons.close_rounded,
       onArt: true,
       size: 38,

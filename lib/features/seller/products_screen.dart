@@ -23,6 +23,7 @@ class SellerProductsScreen extends ConsumerWidget {
   title: Text('Mes produits (${products.length})'),
   actions: [
    IconButton(
+   tooltip: 'Nouveau produit',
    icon: const AppIcon(AppIcons.add_rounded),
    onPressed: () => context.push('/seller/products/new'),
    ),
@@ -140,10 +141,14 @@ class _ProductRow extends ConsumerWidget {
    ),
    ),
    const SizedBox(width: 8),
-   GestureDetector(
-   onTap: () => _openActions(context, ref),
-   child: AppIcon(AppIcons.more_vert_rounded,
+   IconButton(
+   tooltip: 'Actions du produit',
+   icon: AppIcon(AppIcons.more_vert_rounded,
     size: 20, color: cs.onSurfaceVariant),
+   iconSize: 20,
+   padding: EdgeInsets.zero,
+   constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
+   onPressed: () => _openActions(context, ref),
    ),
   ],
   ),
@@ -191,26 +196,49 @@ class _ProductRow extends ConsumerWidget {
     Navigator.of(context).pop();
     final confirmed = await showDialog<bool>(
     context: context,
-    builder: (context) => AlertDialog(
+    builder: (dialogContext) => AlertDialog(
      title: const Text('Retirer ce produit ?'),
      content: Text(
       ' ${product.title} ne sera plus visible par les acheteurs.'),
      actions: [
      TextButton(
-      onPressed: () => Navigator.of(context).pop(false),
+      onPressed: () => Navigator.of(dialogContext).pop(false),
       child: const Text('Annuler'),
      ),
      TextButton(
-      onPressed: () => Navigator.of(context).pop(true),
+      onPressed: () => Navigator.of(dialogContext).pop(true),
       child: const Text('Retirer',
        style: TextStyle(color: AppColors.danger)),
      ),
      ],
     ),
     );
-    if (confirmed == true) {
-    ref.read(sellerProvider.notifier).removeProduct(product.id);
-    }
+    if (confirmed != true) return;
+    // Copie figée AVANT le retrait : permet de republier à l'annulation.
+    final removed = product;
+    ref.read(sellerProvider.notifier).removeProduct(removed.id);
+    if (!context.mounted) return;
+    showAppSnack(
+    context,
+    '${removed.title} retiré de la vente',
+    action: SnackBarAction(
+     label: 'Annuler',
+     onPressed: () => ref.read(sellerProvider.notifier).publish(
+      title: removed.title,
+      price: removed.price,
+      oldPrice: removed.oldPrice,
+      emoji: removed.emoji,
+      seed: removed.seed,
+      categoryId: removed.categoryId,
+      description: removed.description,
+      stock: removed.stock,
+      city: removed.city,
+      tags: removed.tags,
+      express: removed.express,
+      isService: removed.isService,
+     ),
+    ),
+    );
    },
    ),
    const SizedBox(height: 10),

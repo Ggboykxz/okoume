@@ -20,7 +20,7 @@ class AddressesScreen extends ConsumerWidget {
     actions: [
      IconButton(
       icon: const AppIcon(AppIcons.add_rounded),
-      onPressed: () => _addAddress(context, ref),
+      onPressed: () => showAddAddressSheet(context, ref),
      ),
     ],
    ),
@@ -55,7 +55,7 @@ class AddressesScreen extends ConsumerWidget {
       label: 'Ajouter une adresse',
       icon: AppIcons.add_location_alt_rounded,
       variant: AppButtonVariant.outline,
-      onPressed: () => _addAddress(context, ref),
+      onPressed: () => showAddAddressSheet(context, ref),
      ),
      const SizedBox(height: 18),
      InfoBanner(
@@ -69,66 +69,75 @@ class AddressesScreen extends ConsumerWidget {
   );
  }
 
- void _addAddress(BuildContext context, WidgetRef ref) {
+ void showAddAddressSheet(BuildContext context, WidgetRef ref) {
   final labelController = TextEditingController(text: 'Maison');
   final detailsController = TextEditingController();
   final cityController = TextEditingController(text: 'Libreville');
+  final detailsErrorHolder = <String?>[null];
   showAppSheet(
    context,
-   Padding(
-    padding: const EdgeInsets.fromLTRB(22, 16, 22, 22),
-    child: Column(
-     mainAxisSize: MainAxisSize.min,
-     crossAxisAlignment: CrossAxisAlignment.start,
-     children: [
-      Text('Nouvelle adresse',
-        style: Theme.of(context).textTheme.titleMedium),
-      const SizedBox(height: 14),
-      AppTextField(
-        controller: labelController,
-        hint: 'Libellé (Maison, Bureau…)',
-        icon: AppIcons.label_rounded),
-      const SizedBox(height: 10),
-      AppTextField(
-        controller: detailsController,
-        hint: 'Détails (rue, quartier, point de repère…)',
-        icon: AppIcons.signpost_rounded,
-        maxLines: 2),
-      const SizedBox(height: 10),
-      AppTextField(
-        controller: cityController,
-        hint: 'Ville',
-        icon: AppIcons.location_city_rounded),
-      const SizedBox(height: 16),
-      AppButton(
-       label: 'Enregistrer l\'adresse',
-       icon: AppIcons.check_rounded,
-       onPressed: () {
-        final details = detailsController.text.trim();
-        if (details.length < 5) {
-         showAppSnack(context,
-           'Précisez la rue ou le quartier de livraison.',
-           emoji: '');
-         return;
-        }
-        ref.read(addressesProvider.notifier).add(
-           Address(
-            id: 'a-${DateTime.now().millisecondsSinceEpoch}',
-            label: labelController.text.trim().isEmpty
-              ? 'Adresse'
-              : labelController.text.trim(),
-            details: details,
-            city: cityController.text.trim().isEmpty
-              ? 'Libreville'
-              : cityController.text.trim(),
-           ),
-          );
-        Navigator.of(context).pop();
-        showAppSnack(context, 'Adresse ajoutée', emoji: '');
-       },
+   StatefulBuilder(
+    builder: (sheetContext, setSheetState) {
+     final detailsError = detailsErrorHolder[0];
+     return Padding(
+      padding: const EdgeInsets.fromLTRB(22, 16, 22, 22),
+      child: Column(
+       mainAxisSize: MainAxisSize.min,
+       crossAxisAlignment: CrossAxisAlignment.start,
+       children: [
+        Text('Nouvelle adresse',
+          style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 14),
+        AppTextField(
+          controller: labelController,
+          hint: 'Libellé (Maison, Bureau…)',
+          icon: AppIcons.label_rounded),
+        const SizedBox(height: 10),
+        AppTextField(
+          controller: detailsController,
+          hint: 'Détails (rue, quartier, point de repère…)',
+          icon: AppIcons.signpost_rounded,
+          maxLines: 2,
+          errorText: detailsError,
+          onChanged: (_) {
+           if (detailsErrorHolder[0] != null) setSheetState(() => detailsErrorHolder[0] = null);
+          }),
+        const SizedBox(height: 10),
+        AppTextField(
+          controller: cityController,
+          hint: 'Ville',
+          icon: AppIcons.location_city_rounded),
+        const SizedBox(height: 16),
+        AppButton(
+         label: 'Enregistrer l\'adresse',
+         icon: AppIcons.check_rounded,
+         onPressed: () {
+          final details = detailsController.text.trim();
+          if (details.length < 5) {
+           setSheetState(() => detailsErrorHolder[0] =
+            'Précisez la rue ou le quartier de livraison.');
+           return;
+          }
+          ref.read(addressesProvider.notifier).add(
+             Address(
+              id: 'a-${DateTime.now().millisecondsSinceEpoch}',
+              label: labelController.text.trim().isEmpty
+                ? 'Adresse'
+                : labelController.text.trim(),
+              details: details,
+              city: cityController.text.trim().isEmpty
+                ? 'Libreville'
+                : cityController.text.trim(),
+             ),
+            );
+          Navigator.of(context).pop();
+          showAppSnack(context, 'Adresse ajoutée', emoji: '');
+         },
+        ),
+       ],
       ),
-     ],
-    ),
+     );
+    },
    ),
   );
  }

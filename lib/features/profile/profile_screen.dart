@@ -93,6 +93,7 @@ class ProfileScreen extends ConsumerWidget {
      ),
     ),
     AppIconButton(
+     label: 'Modifier le profil',
      icon: AppIcons.edit_rounded,
      size: 38,
      onTap: () => context.push('/profile/edit'),

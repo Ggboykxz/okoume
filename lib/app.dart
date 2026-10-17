@@ -16,7 +16,7 @@ class OkoumeApp extends ConsumerWidget {
   return MaterialApp.router(
    builder: (context, child) {
      final mq = MediaQuery.of(context);
-     final scale = mq.textScaler.scale(1).clamp(0.85, 1.4);
+     final scale = mq.textScaler.scale(1).clamp(0.85, 2.0);
      return MediaQuery(
        data: mq.copyWith(textScaler: TextScaler.linear(scale)),
        child: child ?? const SizedBox.shrink(),

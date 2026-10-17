@@ -11,6 +11,19 @@ abstract final class AppColors {
  static const danger = Color(0xFFFF1744); // Rouge — erreur, annulation
  static const warning = Color(0xFFFFC107); // Jaune — attention, attente
 
+ // Remplissages « profonds » : surface de fond recevant un texte/icône blanc
+ // (≥ 4,5:1 sur blanc — les couleurs de marque vives sont réservées aux accents).
+ static const successDeep = Color(0xFF00823A); // blanc 5,0:1
+ static const dangerDeep = Color(0xFFD32F2F); // blanc 5,0:1
+ static const secondaryDeep = Color(0xFFB34700); // blanc 4,8:1
+
+ // Textes « sur teinte » : lisible sur pastille teintée (couleur à 13 %) ou
+ // directement sur surface claire.
+ static const onTintSuccess = Color(0xFF006E2C); // 5,7:1
+ static const onTintWarning = Color(0xFF8A5A00); // 5,5:1
+ static const onTintSecondary = secondaryDeep; // 4,8:1
+ static const onTintDanger = Color(0xFFC4112D); // 5,0:1
+
  // Surfaces (thème clair)
  static const background = Color(0xFFF5F7FA);
  static const surface = Color(0xFFFFFFFF);

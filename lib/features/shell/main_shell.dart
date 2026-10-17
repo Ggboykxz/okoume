@@ -13,6 +13,7 @@ import '../seller/dashboard_screen.dart';
 import '../seller/orders_screen.dart';
 import '../seller/products_screen.dart';
 import '../seller/quick_sell_screen.dart';
+import '../../core/theme/app_colors.dart';
 import '../../core/ui/app_icons.dart';
 import '../../core/ui/motion.dart';
 
@@ -92,6 +93,7 @@ class _MainShellState extends ConsumerState<MainShell> {
  @override
  Widget build(BuildContext context) {
  final cs = Theme.of(context).colorScheme;
+ final dark = Theme.of(context).brightness == Brightness.dark;
  final user = ref.watch(authProvider);
  final role = user?.role ?? UserRole.acheteur;
  final tabs = _tabsFor(role);
@@ -102,14 +104,14 @@ class _MainShellState extends ConsumerState<MainShell> {
 
  if (isTablet) {
   return Scaffold(
-   body: Row(
+   body: SafeArea(
+   child: Row(
     children: [
      NavigationRail(
       selectedIndex: _index,
       onDestinationSelected: (i) {
        AppMotion.tap();
        shellTabNotifier.value = i;
-       setState(() => _index = i);
       },
       leading: Padding(
        padding: const EdgeInsets.only(top: 8.0),
@@ -120,8 +122,18 @@ class _MainShellState extends ConsumerState<MainShell> {
       destinations: [
        for (final t in tabs)
         NavigationRailDestination(
-         icon: AppIcon(t.icon, color: cs.onSurfaceVariant),
-         selectedIcon: AppIcon(t.icon, color: cs.primary),
+         icon: Badge(
+          label: Text('${t.badge}'),
+          isLabelVisible: t.badge > 0,
+          smallSize: 16,
+          child: AppIcon(t.icon, color: cs.onSurfaceVariant),
+         ),
+         selectedIcon: Badge(
+          label: Text('${t.badge}'),
+          isLabelVisible: t.badge > 0,
+          smallSize: 16,
+          child: AppIcon(t.icon, color: cs.primary),
+         ),
          label: Text(t.label),
         ),
       ],
@@ -129,6 +141,7 @@ class _MainShellState extends ConsumerState<MainShell> {
      const VerticalDivider(thickness: 1, width: 1),
      Expanded(child: IndexedStack(index: _index, children: [for (final t in tabs) t.page])),
     ],
+   ),
    ),
   );
  }
@@ -139,16 +152,16 @@ class _MainShellState extends ConsumerState<MainShell> {
    if (!online)
    Container(
     width: double.infinity,
-    color: const Color(0xFFFFF4D6),
+    color: dark ? AppColors.darkSurfaceHigh : const Color(0xFFFFF4D6),
     padding:
      const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
-    child: const Text(
+    child: Text(
     ' Mode hors ligne — catalogue en cache, commandes synchronisées plus tard',
     textAlign: TextAlign.center,
     style: TextStyle(
      fontSize: 11,
      fontWeight: FontWeight.w700,
-     color: Color(0xFF7A5D00),
+     color: dark ? AppColors.darkText : const Color(0xFF7A5D00),
     ),
     ),
    ),
@@ -176,7 +189,7 @@ class _MainShellState extends ConsumerState<MainShell> {
      for (var i = 0; i < tabs.length; i++)
      Expanded(
       child: Semantics(
-       label: tabs[i].label,
+       label: '${tabs[i].label}${tabs[i].badge > 0 ? ', ${tabs[i].badge} non lus' : ''}',
        selected: i == _index,
        button: true,
        child: _NavItem(
@@ -186,7 +199,6 @@ class _MainShellState extends ConsumerState<MainShell> {
         onTap: () {
          AppMotion.tap();
          shellTabNotifier.value = i;
-         setState(() => _index = i);
         },
        ),
       ),
@@ -232,7 +244,7 @@ class _NavItem extends StatelessWidget {
     width: 46,
     height: 46,
     decoration: BoxDecoration(
-     color: const Color(0xFFFF6B00),
+     color: AppColors.secondaryDeep,
      borderRadius: BorderRadius.circular(14),
     ),
     child: AppIcon(spec.icon, color: Colors.white, size: 24),
@@ -242,10 +254,10 @@ class _NavItem extends StatelessWidget {
     offset: const Offset(0, -4),
     child: Text(
     spec.label,
-    style: const TextStyle(
+    style: TextStyle(
      fontSize: 10.5,
      fontWeight: FontWeight.w700,
-     color: Color(0xFFFF6B00),
+     color: AppColors.secondaryDeep,
     ),
     ),
    ),
@@ -271,20 +283,32 @@ class _NavItem extends StatelessWidget {
     children: [
     AnimatedScale(
      scale: selected ? 1.06 : 1,
-     duration: const Duration(milliseconds: 220),
+     duration: AppMotion.on(context)
+      ? const Duration(milliseconds: 220)
+      : Duration.zero,
      curve: Curves.easeOutCubic,
      child: AppIcon(spec.icon, size: 24, color: color),
     ),
-    if (spec.badge > 0)
-     Positioned(
+    Positioned(
      right: -10,
      top: -4,
-     child: Container(
+     child: AnimatedOpacity(
+     opacity: spec.badge > 0 ? 1 : 0,
+     duration: AppMotion.on(context)
+      ? const Duration(milliseconds: 120)
+      : Duration.zero,
+     child: AnimatedScale(
+      scale: spec.badge > 0 ? 1 : 0,
+      duration: AppMotion.on(context)
+       ? const Duration(milliseconds: 180)
+       : Duration.zero,
+      curve: Curves.easeOutBack,
+      child: Container(
       padding: const EdgeInsets.symmetric(
        horizontal: 5, vertical: 1.5),
       constraints: const BoxConstraints(minWidth: 17),
       decoration: BoxDecoration(
-      color: const Color(0xFFFF1744),
+      color: AppColors.dangerDeep,
       borderRadius: BorderRadius.circular(99),
       border:
        Border.all(color: Colors.white, width: 1.4),
@@ -297,7 +321,9 @@ class _NavItem extends StatelessWidget {
        fontSize: 9.5,
        fontWeight: FontWeight.w800),
       ),
-     ),
+      ),
+      ),
+      ),
      ),
     ],
    ),

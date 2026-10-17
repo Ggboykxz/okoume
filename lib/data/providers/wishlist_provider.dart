@@ -15,3 +15,8 @@ class WishlistNotifier extends Notifier<Set<String>> {
 
 final wishlistProvider =
     NotifierProvider<WishlistNotifier, Set<String>>(WishlistNotifier.new);
+
+/// Favori d'un produit précis — limite le rebuild à la seule carte concernée
+/// lors d'un toggle (au lieu de toutes les cartes montées).
+final wishlistedProvider =
+    Provider.family<bool, String>((ref, id) => ref.watch(wishlistProvider).contains(id));

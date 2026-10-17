@@ -120,16 +120,19 @@ class _PressableState extends State<Pressable> {
  @override
  Widget build(BuildContext context) {
  if (!widget.enabled) return widget.child;
+ final motionOn = AppMotion.on(context);
  return Listener(
   onPointerDown: (_) => _set(true),
   onPointerUp: (_) => _set(false),
   onPointerCancel: (_) => _set(false),
-  child: AnimatedScale(
+  child: motionOn
+  ? AnimatedScale(
   scale: _pressed ? widget.scale : 1,
   duration: const Duration(milliseconds: 110),
   curve: Curves.easeOutCubic,
   child: widget.child,
-  ),
+  )
+  : widget.child,
  );
  }
 

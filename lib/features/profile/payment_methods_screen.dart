@@ -70,46 +70,71 @@ class PaymentMethodsScreen extends ConsumerWidget {
  void _addCard(BuildContext context) {
  final numberController = TextEditingController();
  final expiryController = TextEditingController();
+ final numberErr = <String?>[null];
+ final expiryErr = <String?>[null];
  showAppSheet(
   context,
-  Padding(
-  padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
-  child: Column(
-   mainAxisSize: MainAxisSize.min,
-   crossAxisAlignment: CrossAxisAlignment.start,
-   children: [
-   Text('Nouvelle carte',
-    style: Theme.of(context).textTheme.titleMedium),
-   const SizedBox(height: 14),
-   AppTextField(
-    controller: numberController,
-    hint: 'Numéro de carte (Visa / Mastercard)',
-    icon: AppIcons.credit_card_rounded,
-    keyboardType: TextInputType.number,
-   ),
-   const SizedBox(height: 10),
-   AppTextField(
-    controller: expiryController,
-    hint: 'Expiration (MM/AA)',
-    icon: AppIcons.event_rounded,
-   ),
-   const SizedBox(height: 16),
-   AppButton(
-    label: 'Enregistrer la carte',
-    icon: AppIcons.lock_rounded,
-    onPressed: () {
-    if (numberController.text.trim().length < 12) {
-     showAppSnack(
-      context, 'Numéro de carte incomplet', emoji: '');
-     return;
-    }
-    Navigator.of(context).pop();
-    showAppSnack(
-     context, 'Carte ajoutée et vérifiée (démo)', emoji: '');
-    },
-   ),
-   ],
-  ),
+  StatefulBuilder(
+   builder: (sheetContext, setSheetState) {
+    return Padding(
+    padding: const EdgeInsets.fromLTRB(22, 16, 22, 24),
+    child: Column(
+     mainAxisSize: MainAxisSize.min,
+     crossAxisAlignment: CrossAxisAlignment.start,
+     children: [
+     Text('Nouvelle carte',
+      style: Theme.of(context).textTheme.titleMedium),
+     const SizedBox(height: 14),
+     AppTextField(
+      controller: numberController,
+      hint: 'Numéro de carte (Visa / Mastercard)',
+      icon: AppIcons.credit_card_rounded,
+      keyboardType: TextInputType.number,
+      errorText: numberErr[0],
+      onChanged: (_) {
+       if (numberErr[0] != null) setSheetState(() => numberErr[0] = null);
+      },
+     ),
+     const SizedBox(height: 10),
+     AppTextField(
+      controller: expiryController,
+      hint: 'Expiration (MM/AA)',
+      icon: AppIcons.event_rounded,
+      errorText: expiryErr[0],
+      onChanged: (_) {
+       if (expiryErr[0] != null) setSheetState(() => expiryErr[0] = null);
+      },
+     ),
+     const SizedBox(height: 16),
+     AppButton(
+      label: 'Enregistrer la carte',
+      icon: AppIcons.lock_rounded,
+      onPressed: () {
+      final num = numberController.text.trim().replaceAll(RegExp(r'\s'), '');
+      if (num.length < 12) {
+       setSheetState(() => numberErr[0] = 'Numéro de carte incomplet');
+       return;
+      }
+      final exp = expiryController.text.trim();
+      if (!RegExp(r'^(0[1-9]|1[0-2])/\d{2}$').hasMatch(exp)) {
+       setSheetState(() => expiryErr[0] = 'Format attendu : MM/AA');
+       return;
+      }
+      final parts = exp.split('/');
+      final now = DateTime.now();
+      final expDate = DateTime(2000 + int.parse(parts[1]), int.parse(parts[0]));
+      if (expDate.isBefore(DateTime(now.year, now.month))) {
+       setSheetState(() => expiryErr[0] = 'Carte expirée');
+       return;
+      }
+      Navigator.of(context).pop();
+      showAppSnack(context, 'Carte enregistrée (démo)', emoji: '');
+      },
+     ),
+     ],
+    ),
+    );
+   },
   ),
  );
  }

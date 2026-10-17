@@ -85,6 +85,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   c.clear();
   }
   _nodes.first.requestFocus();
+  AppMotion.warning();
   showAppSnack(context, 'Code incorrect — le code démo est 1 2 3 4',
    emoji: '');
  }
@@ -97,6 +98,7 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
   appBar: AppBar(
   leading: IconButton(
    icon: const AppIcon(AppIcons.arrow_back_rounded),
+   tooltip: 'Retour',
    onPressed: () => context.pop(),
   ),
   title: const Text('Vérification'),
@@ -117,11 +119,14 @@ class _OtpScreenState extends ConsumerState<OtpScreen> {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
     for (var i = 0; i < 4; i++) ...[
-     _OtpBox(
-     controller: _controllers[i],
-     node: _nodes[i],
-     error: _error,
-     onChanged: (v) => _onDigit(i, v),
+     Semantics(
+      label: 'Chiffre ${i + 1} sur 4',
+      child: _OtpBox(
+       controller: _controllers[i],
+       node: _nodes[i],
+       error: _error,
+       onChanged: (v) => _onDigit(i, v),
+      ),
      ),
      if (i < 3) const SizedBox(width: 12),
     ],

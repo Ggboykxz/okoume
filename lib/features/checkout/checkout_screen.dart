@@ -38,6 +38,7 @@ class CheckoutScreen extends ConsumerStatefulWidget {
 
 class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
  int _step = 0;
+ bool _submitting = false;
  DeliveryMode _mode = DeliveryMode.domicile;
  DeliverySpeed _speed = DeliverySpeed.standard;
  PaymentMethod _method = PaymentMethod.airtel;
@@ -130,7 +131,8 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
     : AppButton(
      label: 'Payer ${formatXaf(grandTotal)}',
      icon: AppIcons.lock_rounded,
-     onPressed: () {
+     loading: _submitting,
+     onPressed: _submitting ? null : () {
       if (_method == PaymentMethod.wallet &&
        (user?.balance ?? 0) < grandTotal) {
       showAppSnack(
@@ -140,6 +142,7 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
       );
       return;
       }
+      setState(() => _submitting = true);
       context.push(
       '/payment',
       extra: CheckoutPayload(
@@ -151,6 +154,9 @@ class _CheckoutScreenState extends ConsumerState<CheckoutScreen> {
        total: grandTotal,
       ),
       );
+      Future<void>.delayed(const Duration(milliseconds: 600), () {
+       if (mounted) setState(() => _submitting = false);
+      });
      },
      ),
    ),

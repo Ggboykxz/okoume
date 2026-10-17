@@ -18,6 +18,8 @@ class AuthScreen extends ConsumerStatefulWidget {
 class _AuthScreenState extends ConsumerState<AuthScreen> {
  final _phoneController = TextEditingController(text: '07 45 12 33');
  UserRole _role = UserRole.acheteur;
+ String? _phoneError;
+ bool _requesting = false;
 
  @override
  void dispose() {
@@ -28,14 +30,20 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
  void _submit() {
   final digits = _phoneController.text.replaceAll(RegExp(r'[^0-9]'), '');
   if (digits.length < 8) {
-   showAppSnack(context, 'Entrez un numéro gabonais valide (07 XX XX XX)',
-     emoji: '');
+   setState(() => _phoneError =
+    'Entrez un numéro gabonais valide (ex : 07 45 12 33)');
    return;
   }
+  if (_requesting) return;
+  setState(() => _requesting = true);
   context.push(
    '/auth/otp',
    extra: ('+241 ${_phoneController.text.trim()}', _role),
   );
+  // Restauré au retour de l'écran OTP.
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+   if (mounted) setState(() => _requesting = false);
+  });
  }
 
  @override
@@ -80,41 +88,16 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       ),
       const SizedBox(height: 22),
       // Numéro de téléphone
-      Container(
-       padding: const EdgeInsets.symmetric(horizontal: 14),
-       decoration: BoxDecoration(
-        color: cs.surface,
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: cs.outlineVariant),
-       ),
-       child: Row(
-        children: [
-         const Text('', style: TextStyle(fontSize: 20)),
-         const SizedBox(width: 8),
-         Text('+241',
-           style: TextStyle(
-             fontWeight: FontWeight.w700,
-             fontSize: 14.5,
-             color: cs.onSurface)),
-         const SizedBox(width: 10),
-         Expanded(
-          child: TextField(
-           controller: _phoneController,
-           keyboardType: TextInputType.phone,
-           style: const TextStyle(
-             fontWeight: FontWeight.w700, fontSize: 15),
-           decoration: const InputDecoration(
-            hintText: '07 45 12 33',
-            filled: false,
-            border: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(vertical: 16),
-           ),
-          ),
-         ),
-        ],
-       ),
+      AppTextField(
+       controller: _phoneController,
+       hint: '07 45 12 33',
+       prefixText: '+241 ',
+       keyboardType: TextInputType.phone,
+       textInputAction: TextInputAction.done,
+       errorText: _phoneError,
+       onChanged: (_) {
+        if (_phoneError != null) setState(() => _phoneError = null);
+       },
       ),
       const SizedBox(height: 26),
       Text('Je suis…',
@@ -142,7 +125,8 @@ class _AuthScreenState extends ConsumerState<AuthScreen> {
       AppButton(
        label: 'Recevoir le code SMS',
        icon: AppIcons.sms_rounded,
-       onPressed: _submit,
+       loading: _requesting,
+       onPressed: _requesting ? null : _submit,
       ),
       const SizedBox(height: 14),
       Text(

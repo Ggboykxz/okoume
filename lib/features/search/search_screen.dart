@@ -110,11 +110,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
      ),
      const SizedBox(width: 10),
      AppIconButton(
+     label: 'Filtres',
      icon: AppIcons.tune_rounded,
      backgroundColor:
       filters.hasActiveFilters ? cs.primary : null,
      iconColor:
-      filters.hasActiveFilters ? Colors.white : null,
+      filters.hasActiveFilters ? cs.onPrimary : null,
      onTap: () => _openFilters(context),
      ),
     ],

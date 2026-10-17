@@ -146,12 +146,16 @@ class _CartScreenState extends ConsumerState<CartScreen> {
          fontWeight: FontWeight.w600),
         ),
        ),
-       GestureDetector(
-        onTap: () => ref
+       IconButton(
+        tooltip: 'Retirer la promotion',
+        icon: AppIcon(AppIcons.close_rounded,
+         size: 20, color: cs.onSurfaceVariant),
+        iconSize: 20,
+        padding: EdgeInsets.zero,
+        constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+        onPressed: () => ref
          .read(cartProvider.notifier)
          .removePromo(),
-        child: AppIcon(AppIcons.close_rounded,
-         size: 20, color: cs.onSurfaceVariant),
        ),
        ],
       ),
@@ -380,14 +384,30 @@ class _CartLineRow extends ConsumerWidget {
    ),
   ),
   const SizedBox(width: 4),
-  GestureDetector(
-   onTap: () =>
-    notifier.remove(line.productId, variant: line.variant),
-   child: Padding(
-   padding: const EdgeInsets.only(left: 4, top: 2),
-   child: AppIcon(AppIcons.close_rounded,
+  IconButton(
+   tooltip: 'Retirer du panier',
+   icon: AppIcon(AppIcons.close_rounded,
     size: 18, color: cs.onSurfaceVariant),
-   ),
+   iconSize: 18,
+   padding: EdgeInsets.zero,
+   constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+   onPressed: () {
+    final removed = line;
+    final product = Mock.productById(removed.productId);
+    notifier.remove(removed.productId, variant: removed.variant);
+    showAppSnack(
+     context,
+     '${product.title} retiré du panier',
+     action: SnackBarAction(
+      label: 'Annuler',
+      onPressed: () => notifier.add(
+       removed.productId,
+       qty: removed.qty,
+       variant: removed.variant,
+      ),
+     ),
+    );
+   },
   ),
   ],
  );

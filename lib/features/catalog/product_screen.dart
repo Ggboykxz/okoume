@@ -114,6 +114,7 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
    Padding(
    padding: const EdgeInsets.only(right: 8),
    child: AppIconButton(
+    label: 'Panier',
     icon: AppIcons.shopping_cart_outlined,
     badgeCount: cartCount,
     size: 38,

@@ -11,6 +11,7 @@ class Pill extends StatelessWidget {
     super.key,
     required this.text,
     this.color,
+    this.textColor,
     this.icon,
     this.dense = false,
     this.onTap,
@@ -18,15 +19,47 @@ class Pill extends StatelessWidget {
 
   final String text;
   final Color? color;
+
+  /// Couleur du texte/icône sur la pastille teintée. Déduite de [color] si absent.
+  final Color? textColor;
   final AppIconData? icon;
   final bool dense;
   final VoidCallback? onTap;
+
+  /// Texte lisible sur la pastille teintée (couleur à 13 %) et adapté au
+  /// thème : variante sombre des couleurs vives qui échouent en dark.
+  static Color _pillForeground(BuildContext context, Color c, ColorScheme cs) {
+    final dark = Theme.of(context).brightness == Brightness.dark;
+    if (c == AppColors.success || c == AppColors.delivered) {
+      return AppColors.onTintSuccess;
+    }
+    if (c == AppColors.pending || c == AppColors.warning) {
+      return AppColors.onTintWarning;
+    }
+    if (c == AppColors.secondary || c == AppColors.preparing) {
+      return AppColors.onTintSecondary;
+    }
+    if (c == AppColors.danger) return AppColors.onTintDanger;
+    if (c == AppColors.inDelivery) return const Color(0xFF005FA0); // ≈ 5,6:1
+    if (c == AppColors.cancelled) return cs.onSurfaceVariant;
+    if (c == AppColors.confirmed) {
+      return dark ? const Color(0xFF66AFFF) : c; // 2,96:1 en dark sinon
+    }
+    if (c == AppColors.shipped) {
+      return dark ? const Color(0xFFB39DFF) : const Color(0xFF6A38EE);
+    }
+    return c;
+  }
 
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
     final c = color ?? cs.primary;
-    return Pressable(
+    final fg = textColor ?? _pillForeground(context, c, cs);
+    return Semantics(
+      button: onTap != null,
+      enabled: onTap != null,
+      child: Pressable(
       enabled: onTap != null,
       scale: 0.94,
       child: GestureDetector(
@@ -42,7 +75,7 @@ class Pill extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (icon != null) ...[
-                AppIcon(icon, size: dense ? 11 : 13, color: c),
+                AppIcon(icon, size: dense ? 11 : 13, color: fg),
                 const SizedBox(width: 4),
               ],
               Text(
@@ -50,12 +83,13 @@ class Pill extends StatelessWidget {
                 style: TextStyle(
                   fontSize: dense ? 10.5 : 11.5,
                   fontWeight: FontWeight.w700,
-                  color: c,
+                  color: fg,
                 ),
               ),
             ],
           ),
         ),
+      ),
       ),
     );
   }
@@ -108,9 +142,13 @@ class RatingStars extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
+    return Semantics(
+      label: 'Note ${rating.toStringAsFixed(1).replaceAll('.', ',')} sur 5'
+          '${reviews != null ? ', $reviews avis' : ''}',
+      excludeSemantics: true,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
         for (var i = 0; i < 5; i++)
           Icon(
             rating >= i + 0.75
@@ -139,6 +177,7 @@ class RatingStars extends StatelessWidget {
           ),
         ],
       ],
+      ),
     );
   }
 }

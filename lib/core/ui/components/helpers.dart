@@ -3,11 +3,12 @@ import '../motion.dart';
 
 // ================================================================ Helpers
 
-void showAppSnack(BuildContext context, String message, {String? emoji}) {
+void showAppSnack(BuildContext context, String message,
+    {String? emoji, SnackBarAction? action}) {
   final messenger = ScaffoldMessenger.of(context);
   messenger.hideCurrentSnackBar();
   messenger.showSnackBar(
-    SnackBar(content: Text(emoji == null ? message : '$emoji $message')),
+    SnackBar(content: Text(emoji == null ? message : '$emoji $message'), action: action),
   );
 }
 
@@ -21,11 +22,14 @@ Future<T?> showAppSheet<T>(
     context: context,
     isScrollControlled: isScrollControlled,
     showDragHandle: showHandle,
-    // Feuille « matériau » avec ressort Apple (damping 0.8, réponse 0.3 s).
-    sheetAnimationStyle: AnimationStyle(
-      curve: AppMotion.springBouncy,
-      duration: AppMotion.springBouncy.duration,
-    ),
+    // Feuille « matériau » avec ressort Apple (damping 0.8, réponse 0.3 s),
+    // neutralisée quand le système demande de réduire les animations.
+    sheetAnimationStyle: AppMotion.on(context)
+        ? AnimationStyle(
+            curve: AppMotion.springBouncy,
+            duration: AppMotion.springBouncy.duration,
+          )
+        : null,
     builder: (context) => SafeArea(
       top: false,
       child: Padding(
@@ -81,6 +85,8 @@ class _AppSkeletonState extends State<AppSkeleton>
     final cs = Theme.of(context).colorScheme;
     final base = widget.color ?? cs.surfaceContainerHigh;
     if (AppMotion.reduce || MediaQuery.disableAnimationsOf(context)) {
+      // Fallback statique : le contrôleur est figé (aucune frame dépensée).
+      if (_controller.isAnimating) _controller.stop();
       return Container(
         width: widget.width,
         height: widget.height,
@@ -104,6 +110,31 @@ class _AppSkeletonState extends State<AppSkeleton>
           ),
         );
       },
+    );
+  }
+}
+
+/// Lien texte (ex. « Tout voir › », « Réinitialiser ») : role bouton exposé à
+/// TalkBack/VoiceOver + cible largement alignée (zone tap opaque).
+class AppTextLink extends StatelessWidget {
+  const AppTextLink({super.key, required this.child, this.onTap});
+
+  final Widget child;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      enabled: onTap != null,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+          child: child,
+        ),
+      ),
     );
   }
 }

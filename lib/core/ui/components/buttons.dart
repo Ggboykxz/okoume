@@ -8,7 +8,7 @@ import '../motion.dart';
 
 enum AppButtonVariant { primary, outline, ghost, danger, success }
 
-class AppButton extends StatelessWidget {
+class AppButton extends StatefulWidget {
   const AppButton({
     super.key,
     required this.label,
@@ -31,14 +31,40 @@ class AppButton extends StatelessWidget {
   final bool small;
 
   @override
+  State<AppButton> createState() => _AppButtonState();
+}
+
+class _AppButtonState extends State<AppButton> {
+  /// Garde anti double-tap : ignore les appels dans les 400 ms suivant un tap
+  /// (un acte financier/paiement ne doit jamais s'exécuter deux fois).
+  bool _locked = false;
+
+  void _handleTap() {
+    if (_locked) return;
+    final cb = widget.onPressed;
+    if (cb == null) return;
+    cb();
+    _locked = true;
+    Future<void>.delayed(const Duration(milliseconds: 400), () {
+      if (mounted) setState(() => _locked = false);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    final enabled = onPressed != null && !loading;
+    final enabled = widget.onPressed != null && !widget.loading;
+    final loading = widget.loading;
+    final variant = widget.variant;
+    final small = widget.small;
+    final expanded = widget.expanded;
+    final height = widget.height;
+    final icon = widget.icon;
 
     final (Color bg, Color fg, Border? border) = switch (variant) {
-      AppButtonVariant.primary => (cs.primary, Colors.white, null),
-      AppButtonVariant.success => (AppColors.success, Colors.white, null),
-      AppButtonVariant.danger => (AppColors.danger, Colors.white, null),
+      AppButtonVariant.primary => (cs.primary, cs.onPrimary, null),
+      AppButtonVariant.success => (AppColors.successDeep, Colors.white, null),
+      AppButtonVariant.danger => (AppColors.dangerDeep, Colors.white, null),
       AppButtonVariant.outline => (
         Colors.transparent,
         cs.primary,
@@ -62,7 +88,7 @@ class AppButton extends StatelessWidget {
           SizedBox(width: small ? 6 : 8),
         ],
         Text(
-          label,
+          widget.label,
           style: TextStyle(
             fontFamily: AppTheme.poppins,
             fontWeight: FontWeight.w600,
@@ -83,10 +109,11 @@ class AppButton extends StatelessWidget {
           color: bg,
           borderRadius: BorderRadius.circular(small ? 12 : 14),
           child: InkWell(
-            onTap: enabled ? onPressed : null,
+            onTap: enabled ? _handleTap : null,
             borderRadius: BorderRadius.circular(small ? 12 : 14),
             child: Container(
-              height: height,
+              // Plancher accessibilité : cible tactile ≥ 44 px même en `small`.
+              height: height < 44 ? 44 : height,
               constraints:
                   expanded ? null : const BoxConstraints(minWidth: 96),
               padding: EdgeInsets.symmetric(horizontal: small ? 14 : 18),
@@ -102,7 +129,12 @@ class AppButton extends StatelessWidget {
     );
 
     final result = expanded ? SizedBox(width: double.infinity, child: button) : button;
-    return Semantics(button: true, label: label, enabled: enabled, child: result);
+    return Semantics(
+      button: true,
+      label: widget.label,
+      enabled: enabled,
+      child: result,
+    );
   }
 }
 
@@ -110,6 +142,7 @@ class AppIconButton extends StatelessWidget {
   const AppIconButton({
     super.key,
     required this.icon,
+    required this.label,
     this.onTap,
     this.badgeCount = 0,
     this.size = 48,
@@ -119,6 +152,9 @@ class AppIconButton extends StatelessWidget {
     this.iconSize,
   });
 
+  /// Nom accessible annoncé par TalkBack/VoiceOver (le bouton est remplacé par
+  /// « $label, $badgeCount » quand un compteur est présent).
+  final String label;
   final AppIconData icon;
   final VoidCallback? onTap;
   final int badgeCount;
@@ -136,7 +172,11 @@ class AppIconButton extends StatelessWidget {
             ? Colors.white.withValues(alpha: 0.92)
             : cs.surfaceContainerHigh);
     final fg = iconColor ?? (onArt ? AppColors.text : cs.onSurface);
-    return Pressable(
+    return Semantics(
+      button: true,
+      enabled: onTap != null,
+      label: badgeCount > 0 ? '$label, $badgeCount' : label,
+      child: Pressable(
       enabled: onTap != null,
       scale: 0.92,
       child: GestureDetector(
@@ -158,7 +198,7 @@ class AppIconButton extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
                   constraints: const BoxConstraints(minWidth: 18),
                   decoration: BoxDecoration(
-                    color: AppColors.danger,
+                    color: AppColors.dangerDeep,
                     borderRadius: BorderRadius.circular(999),
                     border: Border.all(color: Colors.white, width: 1.5),
                   ),
@@ -175,6 +215,7 @@ class AppIconButton extends StatelessWidget {
               ),
           ],
         ),
+      ),
       ),
     );
   }

@@ -30,7 +30,7 @@ class PriceText extends StatelessWidget {
         Flexible(
           child: Text(
             formatXaf(price),
-            maxLines: 1,
+            maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               fontFamily: AppTheme.montserrat,
@@ -45,7 +45,7 @@ class PriceText extends StatelessWidget {
           Flexible(
             child: Text(
               formatXaf(oldPrice!),
-              maxLines: 1,
+              maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: size * 0.72,

@@ -22,9 +22,11 @@ class ProductCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cs = Theme.of(context).colorScheme;
-    final wished = ref.watch(wishlistProvider).contains(product.id);
+    final wished = ref.watch(wishlistedProvider(product.id));
 
-    return Pressable(
+    return Semantics(
+      button: true,
+      child: Pressable(
       scale: 0.98,
       child: GestureDetector(
         onTap: () => context.push('/product/${product.id}'),
@@ -48,36 +50,66 @@ class ProductCard extends ConsumerWidget {
                       ),
                     ),
                     Positioned(
-                      right: 8,
-                      top: 8,
-                      child: GestureDetector(
-                        onTap: () {
-                          ref.read(wishlistProvider.notifier).toggle(product.id);
-                          AppMotion.tap();
-                          final nowWished = ref
-                              .read(wishlistProvider)
-                              .contains(product.id);
-                          showAppSnack(
-                            context,
-                            nowWished
-                                ? 'Ajouté à vos favoris'
-                                : 'Retiré de vos favoris',
-                            emoji: nowWished ? '' : '',
-                          );
-                        },
-                        child: Container(
-                          width: 30,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.92),
-                            shape: BoxShape.circle,
-                          ),
-                          child: Icon(
-                            wished
-                                ? Icons.favorite_rounded
-                                : Icons.favorite_outline_rounded,
-                            size: 16,
-                            color: wished ? AppColors.danger : AppColors.text,
+                      right: 4,
+                      top: 4,
+                      child: Semantics(
+                        button: true,
+                        toggled: wished,
+                        label: wished
+                            ? 'Retirer des favoris'
+                            : 'Ajouter aux favoris',
+                        child: GestureDetector(
+                          behavior: HitTestBehavior.opaque,
+                          onTap: () {
+                            ref
+                                .read(wishlistProvider.notifier)
+                                .toggle(product.id);
+                            AppMotion.tap();
+                            final nowWished = ref
+                                .read(wishlistProvider)
+                                .contains(product.id);
+                            showAppSnack(
+                              context,
+                              nowWished
+                                  ? 'Ajouté à vos favoris'
+                                  : 'Retiré de vos favoris',
+                              emoji: nowWished ? '' : '',
+                            );
+                          },
+                          child: Container(
+                            width: 44,
+                            height: 44,
+                            padding: const EdgeInsets.all(7),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white.withValues(alpha: 0.92),
+                                shape: BoxShape.circle,
+                              ),
+                              alignment: Alignment.center,
+                              child: AnimatedSwitcher(
+                                duration: AppMotion.on(context)
+                                    ? const Duration(milliseconds: 220)
+                                    : Duration.zero,
+                                transitionBuilder: (child, anim) =>
+                                    ScaleTransition(
+                                  scale: CurvedAnimation(
+                                    parent: anim,
+                                    curve: Curves.easeOutBack,
+                                  ),
+                                  child: child,
+                                ),
+                                child: Icon(
+                                  wished
+                                      ? Icons.favorite_rounded
+                                      : Icons.favorite_outline_rounded,
+                                  key: ValueKey<bool>(wished),
+                                  size: 16,
+                                  color: wished
+                                      ? AppColors.danger
+                                      : AppColors.text,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -123,6 +155,7 @@ class ProductCard extends ConsumerWidget {
           ),
         ),
       ),
+      ),
     );
   }
 }
@@ -137,7 +170,9 @@ class ProductTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final cs = Theme.of(context).colorScheme;
     final seller = ref.watch(sellerByIdProvider(product.sellerId));
-    return Pressable(
+    return Semantics(
+      button: true,
+      child: Pressable(
       scale: 0.98,
       child: GestureDetector(
         onTap: onTap ?? () => context.push('/product/${product.id}'),
@@ -199,6 +234,7 @@ class ProductTile extends ConsumerWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

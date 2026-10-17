@@ -27,6 +27,8 @@ String formatXafCompact(num amount) {
     : m.toStringAsFixed(1).replaceAll('.', ',');
   return '$str\u00A0M\u00A0FCFA';
  }
+ // Une valeur k qui arrondit à «1000 k» bascule en méga (999 500 et +).
+ if (amount >= 985000) return '1\u00A0M\u00A0FCFA';
  if (amount >= 100000) return '${(amount / 1000).round()}\u00A0k\u00A0FCFA';
  return formatXaf(amount);
 }

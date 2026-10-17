@@ -114,12 +114,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       ),
      ),
      AppIconButton(
+      label: 'Notifications',
       icon: AppIcons.notifications_none_rounded,
       badgeCount: unreadNotifs,
       onTap: () => context.push('/notifications'),
      ),
      const SizedBox(width: 10),
      AppIconButton(
+      label: 'Panier',
       icon: AppIcons.shopping_cart_outlined,
       badgeCount: cartCount,
       onTap: () => context.push('/cart'),

@@ -41,18 +41,26 @@ class SectionHeader extends StatelessWidget {
             ),
           ),
           if (actionLabel != null)
-            GestureDetector(
-              onTap: onAction,
-              child: Row(
-                children: [
-                  Text(actionLabel!,
-                      style: TextStyle(
-                          color: cs.primary,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13)),
-                  AppIcon(AppIcons.chevron_right_rounded,
-                      size: 18, color: cs.primary),
-                ],
+            Semantics(
+              button: true,
+              enabled: onAction != null,
+              child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onAction,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  child: Row(
+                    children: [
+                      Text(actionLabel!,
+                          style: TextStyle(
+                              color: cs.primary,
+                              fontWeight: FontWeight.w700,
+                              fontSize: 13)),
+                      AppIcon(AppIcons.chevron_right_rounded,
+                          size: 18, color: cs.primary),
+                    ],
+                  ),
+                ),
               ),
             ),
         ],
@@ -78,6 +86,8 @@ class AppTextField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.textCapitalization = TextCapitalization.none,
+    this.textInputAction,
+    this.prefixText,
   });
 
   final TextEditingController? controller;
@@ -94,6 +104,8 @@ class AppTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final String? errorText;
   final TextCapitalization textCapitalization;
+  final TextInputAction? textInputAction;
+  final String? prefixText;
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +117,13 @@ class AppTextField extends StatelessWidget {
                 ? TextInputType.number
                 : null);
     final effectiveObscure = obscure ||
-        h.contains('mot de passe') || h.contains('password') || h.contains('code') || h.contains('otp') || h.contains('nip');
+        h.contains('mot de passe') || h.contains('password') || h.contains('otp') || h.contains('nip');
     return TextField(
       controller: controller,
       onChanged: onChanged,
       onSubmitted: onSubmitted,
       keyboardType: effectiveType,
+      textInputAction: textInputAction,
       obscureText: effectiveObscure,
       maxLines: maxLines,
       autofocus: autofocus,
@@ -121,6 +134,7 @@ class AppTextField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         errorText: errorText,
+        prefixText: prefixText,
         prefixIcon: icon == null
             ? null
             : AppIcon(icon, size: 20, color: Theme.of(context).colorScheme.onSurfaceVariant),
@@ -145,34 +159,51 @@ class QtyStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    Widget btn(AppIconData icon, VoidCallback? onTap, {bool enabled = true}) =>
-        GestureDetector(
-          onTap: enabled ? onTap : null,
-          child: Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              color: cs.surfaceContainerHigh,
-              borderRadius: BorderRadius.circular(10),
+    Widget btn(AppIconData icon, VoidCallback? onTap,
+        {bool enabled = true, required String label}) =>
+        Semantics(
+          button: true,
+          enabled: enabled && onTap != null,
+          label: label,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: enabled ? onTap : null,
+            child: Container(
+              width: 44,
+              height: 44,
+              padding: const EdgeInsets.all(2),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: cs.surfaceContainerHigh,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: AppIcon(icon,
+                  size: 17,
+                  color: enabled ? cs.onSurface : cs.onSurfaceVariant),
             ),
-            child: AppIcon(icon,
-                size: 17,
-                color: enabled ? cs.onSurface : cs.onSurfaceVariant),
           ),
         );
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        btn(AppIcons.remove_rounded, () => onChanged(value - 1)),
+        btn(AppIcons.remove_rounded, () => onChanged(value - 1),
+            label: 'Diminuer la quantité'),
         Container(
           constraints: const BoxConstraints(minWidth: 34),
           alignment: Alignment.center,
-          child: Text(
-            '$value',
-            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+          child: Semantics(
+            label: 'Quantité : $value',
+            child: ExcludeSemantics(
+              child: Text(
+                '$value',
+                style: const TextStyle(
+                    fontWeight: FontWeight.w700, fontSize: 14),
+              ),
+            ),
           ),
         ),
-        btn(AppIcons.add_rounded, () => onChanged(value + 1), enabled: value < max),
+        btn(AppIcons.add_rounded, () => onChanged(value + 1),
+            enabled: value < max, label: 'Augmenter la quantité'),
       ],
     );
   }
@@ -199,15 +230,27 @@ class AppChip extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     final c = color ?? cs.primary;
     final bg = selected ? c : cs.surfaceContainerHigh;
-    final fg = selected ? Colors.white : cs.onSurface;
-    return Pressable(
-      enabled: onTap != null,
-      scale: 0.95,
-      child: GestureDetector(
-        onTap: onTap,
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 160),
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+    // Foreground contrasté : onPrimary fourni par le scheme pour le primaire,
+    // sinon texte sombre/clair selon la luminance de la teinte choisie.
+    final fg = selected
+        ? (c == cs.primary
+            ? cs.onPrimary
+            : (c.computeLuminance() > 0.35 ? Colors.black87 : Colors.white))
+        : cs.onSurface;
+    return Semantics(
+      button: onTap != null,
+      checked: selected ? (onTap != null ? true : null) : null,
+      child: Pressable(
+        enabled: onTap != null,
+        scale: 0.95,
+        child: GestureDetector(
+          onTap: onTap,
+          child: AnimatedContainer(
+            duration: AppMotion.on(context)
+                ? const Duration(milliseconds: 160)
+                : Duration.zero,
+            curve: Curves.easeOutCubic,
+            padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
           decoration: BoxDecoration(
             color: bg,
             borderRadius: BorderRadius.circular(999),
@@ -227,6 +270,7 @@ class AppChip extends StatelessWidget {
             ],
           ),
         ),
+      ),
       ),
     );
   }

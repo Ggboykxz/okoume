@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import 'theme/app_theme.dart';
+import 'theme/app_colors.dart';
 import 'ui/app_icons.dart';
 
 /// Identité visuelle : vignettes produit, avatars boutiques, logo.
@@ -107,8 +108,8 @@ class ProductArt extends StatelessWidget {
           child: Container(
            padding: const EdgeInsets.symmetric(
              horizontal: 8, vertical: 4),
-           decoration: const BoxDecoration(
-            color: Color(0xFFFF6B00),
+           decoration: BoxDecoration(
+            color: AppColors.secondaryDeep,
             borderRadius: BorderRadius.only(
              topRight: Radius.circular(10),
              bottomRight: Radius.circular(10),
@@ -180,8 +181,8 @@ class SellerAvatar extends StatelessWidget {
        child: Container(
         width: badge,
         height: badge,
-        decoration: const BoxDecoration(
-         color: Color(0xFF0066CC),
+        decoration: BoxDecoration(
+         color: AppColors.primary,
          shape: BoxShape.circle,
          border: Border.fromBorderSide(
            BorderSide(color: Colors.white, width: 1.6)),
@@ -210,13 +211,13 @@ class AppLogo extends StatelessWidget {
    decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(size * 0.3),
     gradient: const LinearGradient(
-     colors: [Color(0xFF0066CC), Color(0xFF3399FF)],
+     colors: [AppColors.primary, Color(0xFF3399FF)],
      begin: Alignment.topLeft,
      end: Alignment.bottomRight,
     ),
     boxShadow: [
      BoxShadow(
-      color: const Color(0xFF0066CC).withValues(alpha: 0.32),
+      color: AppColors.primary.withValues(alpha: 0.32),
       blurRadius: size * 0.3,
       offset: Offset(0, size * 0.12),
      ),
@@ -241,8 +242,8 @@ class AppLogo extends StatelessWidget {
       child: Container(
        width: size * 0.14,
        height: size * 0.14,
-       decoration: const BoxDecoration(
-        color: Color(0xFFFF6B00),
+       decoration: BoxDecoration(
+        color: AppColors.secondaryDeep,
         shape: BoxShape.circle,
        ),
       ),
