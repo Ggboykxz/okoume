@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -16,6 +17,7 @@ class SearchScreen extends ConsumerStatefulWidget {
 
 class _SearchScreenState extends ConsumerState<SearchScreen> {
  final _controller = TextEditingController();
+ Timer? _debounce;
 
  static const _recentSearches = ['samsung', 'karité', 'robe wax', 'moto'];
  static const _trending = [
@@ -91,8 +93,13 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
       controller: _controller,
       hint: 'Que cherchez-vous ?',
       icon: AppIcons.search_rounded,
-      onChanged: (v) =>
-       ref.read(searchFiltersProvider.notifier).setQuery(v),
+      onChanged: (v) {
+       _debounce?.cancel();
+       _debounce = Timer(const Duration(milliseconds: 150), () {
+        ref.read(searchFiltersProvider.notifier).setQuery(v);
+       });
+       setState(() {});
+      },
       onSubmitted: _search,
       suffix: _controller.text.isEmpty
        ? null
