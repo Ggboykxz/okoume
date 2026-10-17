@@ -6,6 +6,7 @@ import '../../core/art.dart';
 import '../../core/format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/ui/common.dart';
+import '../../core/ui/motion.dart';
 import '../../data/models.dart';
 import '../../data/providers.dart';
 import '../../core/ui/app_icons.dart';
@@ -46,6 +47,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
  void _send() {
  final text = _controller.text.trim();
  if (text.isEmpty) return;
+ AppMotion.tap();
  ref.read(chatProvider.notifier).send(widget.threadId, text: text);
  _controller.clear();
  setState(() {});
@@ -74,8 +76,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
    onPressed: () {
     final amount = int.tryParse(
      controller.text.replaceAll(RegExp(r'[^0-9]'), ''));
+    if (amount == null || amount <= 0) {
+     showAppSnack(context, 'Indiquez un montant valide en FCFA', emoji: '');
+     return;
+    }
     Navigator.of(context).pop();
-    if (amount == null || amount <= 0) return;
     ref.read(chatProvider.notifier).send(
      widget.threadId,
      text: formatXaf(amount),
@@ -180,10 +185,30 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
      leading: const AppIcon(AppIcons.block_rounded,
       color: AppColors.danger),
      title: const Text('Bloquer ce vendeur'),
-     onTap: () {
+     onTap: () async {
       Navigator.of(context).pop();
-      showAppSnack(context, '${seller.name} bloqué',
-       emoji: '');
+      final ok = await showDialog<bool>(
+       context: context,
+       builder: (ctx) => AlertDialog(
+        title: const Text('Bloquer ce vendeur ?'),
+        content: Text(
+         '${seller.name} ne pourra plus vous contacter ni voir vos annonces.'),
+        actions: [
+         TextButton(
+          onPressed: () => Navigator.of(ctx).pop(false),
+          child: const Text('Annuler'),
+         ),
+         TextButton(
+          onPressed: () => Navigator.of(ctx).pop(true),
+          child: const Text('Bloquer',
+           style: TextStyle(color: AppColors.danger)),
+         ),
+        ],
+       ),
+      );
+      if (ok != true || !context.mounted) return;
+      ref.read(chatProvider.notifier).blockSeller(widget.threadId);
+      showAppSnack(context, '${seller.name} bloqué', emoji: '');
      },
      ),
      const SizedBox(height: 10),
@@ -297,10 +322,16 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
        ),
       ),
       const SizedBox(width: 8),
-      GestureDetector(
-       onTap: _send,
-       child: AnimatedContainer(
-       duration: const Duration(milliseconds: 150),
+      Semantics(
+       button: true,
+       label: 'Envoyer le message',
+       enabled: _controller.text.trim().isNotEmpty,
+       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: _send,
+        child: AnimatedContainer(
+       duration: AppMotion.on(context) ? const Duration(milliseconds: 150) : Duration.zero,
+       curve: Curves.easeOutCubic,
        width: 46,
        height: 46,
        decoration: BoxDecoration(
@@ -314,7 +345,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
         size: 21,
         color: _controller.text.trim().isEmpty
          ? cs.onSurfaceVariant
-         : Colors.white,
+         : cs.onPrimary,
+       ),
        ),
        ),
       ),
@@ -341,7 +373,7 @@ class _Bubble extends StatelessWidget {
  final cs = Theme.of(context).colorScheme;
  final isOffer = message.kind == MessageKind.offer;
  final bg = message.fromMe ? cs.primary : cs.surface;
- final fg = message.fromMe ? Colors.white : cs.onSurface;
+ final fg = message.fromMe ? cs.onPrimary : cs.onSurface;
 
  return Align(
   alignment:
@@ -380,8 +412,8 @@ class _Bubble extends StatelessWidget {
       fontSize: 11.5,
       fontWeight: FontWeight.w800,
       color: message.fromMe
-       ? Colors.white
-       : AppColors.secondary,
+       ? cs.onPrimary
+       : AppColors.secondaryDeep,
       ),
      ),
      ],

@@ -18,6 +18,7 @@ class ChatNotifier extends Notifier<List<ChatThread>> {
   ];
 
   int _replyIndex = 0;
+  final Set<String> _blockedThreads = <String>{};
 
   ChatNotifier() {
     // Alias explicite pour la lisibilité.
@@ -53,6 +54,13 @@ class ChatNotifier extends Notifier<List<ChatThread>> {
     if (index < 0) return;
     state = List.of(state)..[index] = state[index].copyWith(unread: 0);
   }
+  void blockSeller(String threadId) {
+    _blockedThreads.add(threadId);
+    // Retire le fil de la liste affichée (l'utilisateur ne le voit plus).
+    state = state.where((t) => t.id != threadId).toList();
+  }
+
+  bool isBlocked(String threadId) => _blockedThreads.contains(threadId);
 
   /// Retourne l'id du fil existant avec ce vendeur, ou en crée un nouveau.
   String ensureThread(String sellerId) {
