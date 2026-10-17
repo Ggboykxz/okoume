@@ -46,7 +46,7 @@ class LivreurWalletScreen extends ConsumerWidget {
     Text(
      'Solde livreur',
      style: TextStyle(
-     color: Colors.white.withValues(alpha: 0.85),
+     color: Colors.white,
      fontSize: 12.5,
      fontWeight: FontWeight.w600,
      ),
@@ -65,7 +65,7 @@ class LivreurWalletScreen extends ConsumerWidget {
     Text(
      'Gains du jour : ${formatXaf(state.gainsToday)}',
      style: TextStyle(
-     color: Colors.white.withValues(alpha: 0.85),
+     color: Colors.white,
      fontSize: 12.5,
      fontWeight: FontWeight.w600,
      ),
