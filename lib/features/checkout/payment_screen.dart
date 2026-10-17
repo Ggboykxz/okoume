@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/ui/common.dart';
+import '../../core/ui/motion.dart';
 import '../../data/models.dart';
 import '../../data/providers.dart';
 import 'checkout_screen.dart';
@@ -142,12 +144,17 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
         ),
        ),
        const SizedBox(height: 34),
-       SizedBox(
-        width: 30,
-        height: 30,
-        child: CircularProgressIndicator(
-         strokeWidth: 3,
-         color: method.color,
+       LottieArt(
+        'assets/lottie/pulse.json',
+        size: 48,
+        loop: true,
+        fallback: SizedBox(
+         width: 30,
+         height: 30,
+         child: CircularProgressIndicator(
+          strokeWidth: 3,
+          color: method.color,
+         ),
         ),
        ),
        const SizedBox(height: 14),
@@ -197,24 +204,26 @@ class _PaymentScreenState extends ConsumerState<PaymentScreen> {
              fontWeight: FontWeight.w600),
           ),
          ),
-         Container(width: 1, height: 16, color: cs.outlineVariant),
-         TextButton(
-          onPressed: () {
-           _timer?.cancel();
-           if (context.canPop()) {
-            context.pushReplacement('/payment/failed',
-              extra: widget.payload);
-           } else {
-            context.go('/payment/failed');
-           }
-          },
-          child: Text(
-           'Échec (démo)',
-           style: TextStyle(
-             color: cs.onSurfaceVariant.withValues(alpha: 0.75),
-             fontWeight: FontWeight.w600),
+         if (kDebugMode) ...[
+          Container(width: 1, height: 16, color: cs.outlineVariant),
+          TextButton(
+           onPressed: () {
+            _timer?.cancel();
+            if (context.canPop()) {
+             context.pushReplacement('/payment/failed',
+               extra: widget.payload);
+            } else {
+             context.go('/payment/failed');
+            }
+           },
+           child: Text(
+            'Échec (démo)',
+            style: TextStyle(
+              color: cs.onSurfaceVariant.withValues(alpha: 0.75),
+              fontWeight: FontWeight.w600),
+           ),
           ),
-         ),
+         ],
         ],
        ),
       ],

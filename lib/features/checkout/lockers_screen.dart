@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/ui/app_icons.dart';
 import '../../core/ui/common.dart';
+import '../../core/format.dart';
 import '../../core/ui/motion.dart';
 
 /// A-66 Consignes / lockers de retrait (+ A-67 : fiche d'une consigne).
@@ -206,7 +207,7 @@ class LockersScreen extends StatelessWidget {
      const SizedBox(height: 8),
      _InfoRow(
      label: 'Frais de dépôt',
-     value: '${locker.fee} FCFA',
+     value: formatXaf(locker.fee),
      ),
      const SizedBox(height: 8),
      const _InfoRow(
@@ -322,8 +323,8 @@ class _LockerCard extends StatelessWidget {
      ],
     ),
     ),
-    const AppIcon(AppIcons.chevron_right_rounded,
-     size: 20, color: Color(0xFF9AA4B2)),
+    AppIcon(AppIcons.chevron_right_rounded,
+     size: 20, color: cs.onSurfaceVariant),
    ],
    ),
   ),
