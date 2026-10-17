@@ -7,6 +7,7 @@ import '../../core/ui/common.dart';
 import '../../data/models.dart';
 import '../../data/providers.dart';
 import '../../core/ui/app_icons.dart';
+import '../../core/ui/motion.dart';
 
 class SellerFinanceScreen extends ConsumerStatefulWidget {
  const SellerFinanceScreen({super.key});
@@ -302,8 +303,29 @@ class _SellerFinanceScreenState extends ConsumerState<SellerFinanceScreen> {
          label: 'Retirer ${formatXaf(amount)}',
          icon: AppIcons.south_west_rounded,
          variant: AppButtonVariant.success,
-         onPressed: () {
+         onPressed: () async {
+          final ok = await showDialog<bool>(
+           context: context,
+           builder: (ctx) => AlertDialog(
+            title: const Text('Confirmer le retrait'),
+            content: Text(
+             'Retirer ${formatXaf(amount)} vers ${method.label} ?'),
+            actions: [
+             TextButton(
+              onPressed: () => Navigator.of(ctx).pop(false),
+              child: const Text('Annuler'),
+             ),
+             TextButton(
+              onPressed: () => Navigator.of(ctx).pop(true),
+              child: const Text('Confirmer'),
+             ),
+            ],
+           ),
+          );
+          if (ok != true || !context.mounted) return;
           setState(() => _balance -= amount);
+          AppMotion.success();
+          if (!context.mounted) return;
           Navigator.of(context).pop();
           showAppSnack(
            context,
