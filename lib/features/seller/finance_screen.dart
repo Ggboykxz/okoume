@@ -47,8 +47,8 @@ class _SellerFinanceScreenState extends ConsumerState<SellerFinanceScreen> {
      Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-       gradient: const LinearGradient(
-        colors: [Color(0xFF00C853), Color(0xFF008F3B)],
+       gradient: LinearGradient(
+        colors: [AppColors.successDeep, const Color(0xFF005C26)],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
        ),

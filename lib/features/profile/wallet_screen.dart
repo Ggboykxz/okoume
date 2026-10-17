@@ -58,7 +58,7 @@ class WalletScreen extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(
        horizontal: 9, vertical: 4),
       decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: 0.18),
+      color: Colors.white,
       borderRadius: BorderRadius.circular(99),
       ),
       child: const Row(
@@ -68,7 +68,7 @@ class WalletScreen extends ConsumerWidget {
        Text(
        'OKOUME PAY',
        style: TextStyle(
-        color: Colors.white,
+        color: AppColors.primary,
         fontSize: 9.5,
         fontWeight: FontWeight.w800,
         letterSpacing: 0.8,

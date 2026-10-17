@@ -7,6 +7,7 @@ import '../../core/ui/common.dart';
 import '../../data/models.dart';
 import '../../data/providers.dart';
 import '../shell/main_shell.dart';
+import '../../core/theme/app_colors.dart';
 import '../../core/ui/app_icons.dart';
 
 class SellerDashboardScreen extends ConsumerWidget {
@@ -85,18 +86,18 @@ class SellerDashboardScreen extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(
        horizontal: 9, vertical: 4),
       decoration: BoxDecoration(
-      color: Colors.white.withValues(alpha: 0.18),
+      color: Colors.white,
       borderRadius: BorderRadius.circular(99),
       ),
       child: const Row(
       children: [
        AppIcon(AppIcons.verified_rounded,
-        size: 13, color: Colors.white),
+        size: 13, color: AppColors.primary),
        SizedBox(width: 4),
        Text(
        'KYC OK',
        style: TextStyle(
-        color: Colors.white,
+        color: AppColors.primary,
         fontSize: 10,
         fontWeight: FontWeight.w800,
        ),
