@@ -36,6 +36,9 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
  String _city = 'Libreville';
  bool _express = false;
  bool _isService = false;
+ String? _titleError;
+ String? _priceError;
+ String? _oldPriceError;
 
  bool get _isEdit => widget.productId != null;
 
@@ -75,21 +78,15 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
  void _save() {
  final title = _title.text.trim();
  final price = int.tryParse(_price.text.replaceAll(' ', ''));
- if (title.length < 4) {
-  showAppSnack(context, 'Le titre doit faire au moins 4 caractères',
-   emoji: '');
-  return;
- }
- if (price == null || price <= 0) {
-  showAppSnack(context, 'Entrez un prix valide en FCFA', emoji: '');
-  return;
- }
  final oldPrice = int.tryParse(_oldPrice.text.replaceAll(' ', ''));
- if (oldPrice != null && oldPrice <= price) {
-  showAppSnack(context, 'Le prix barré doit être supérieur au prix',
-   emoji: '');
-  return;
- }
+ setState(() {
+  _titleError = title.length < 4 ? 'Le titre doit faire au moins 4 caractères' : null;
+  _priceError = (price == null || price <= 0) ? 'Entrez un prix valide en FCFA' : null;
+  _oldPriceError = (oldPrice != null && price != null && oldPrice <= price)
+   ? 'Le prix barré doit être supérieur au prix'
+   : null;
+ });
+ if (_titleError != null || _priceError != null || _oldPriceError != null) return;
  final stock = _isService ? 999 : (int.tryParse(_stock.text) ?? 1);
  final notifier = ref.read(sellerProvider.notifier);
 
@@ -100,7 +97,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
    Product(
    id: existing.id,
    title: title,
-   price: price,
+   price: price!,
    oldPrice: oldPrice,
    emoji: _emoji,
    seed: existing.seed,
@@ -127,7 +124,7 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
  } else {
   notifier.publish(
   title: title,
-  price: price,
+  price: price!,
   oldPrice: oldPrice,
   emoji: _emoji,
   seed: DateTime.now().millisecondsSinceEpoch % 1000,
@@ -245,6 +242,8 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
      hint: 'Titre de l\'annonce (ex. iPhone 13 128 Go)',
      icon: AppIcons.title_rounded,
      textCapitalization: TextCapitalization.sentences,
+     errorText: _titleError,
+     onChanged: (_) { if (_titleError != null) setState(() => _titleError = null); },
      ),
      const SizedBox(height: 12),
      AppTextField(
@@ -283,6 +282,8 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
        controller: _price,
        hint: 'Prix',
        keyboardType: TextInputType.number,
+       errorText: _priceError,
+       onChanged: (_) { if (_priceError != null) setState(() => _priceError = null); },
       ),
       ),
       const SizedBox(width: 10),
@@ -291,6 +292,8 @@ class _ProductFormScreenState extends ConsumerState<ProductFormScreen> {
        controller: _oldPrice,
        hint: 'Prix barré (facultatif)',
        keyboardType: TextInputType.number,
+       errorText: _oldPriceError,
+       onChanged: (_) { if (_oldPriceError != null) setState(() => _oldPriceError = null); },
       ),
       ),
      ],

@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/format.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/ui/common.dart';
+import '../../core/ui/motion.dart';
 import '../../data/providers.dart';
 import '../../core/ui/app_icons.dart';
 
@@ -91,7 +92,7 @@ class _CourseScreenState extends ConsumerState<CourseScreen> {
    children: [
     Center(
     child: TweenAnimationBuilder<double>(
-     tween: Tween(begin: 0, end: 1),
+     tween: AppMotion.on(context) ? Tween(begin: 0, end: 1) : ConstantTween<double>(1.0),
      duration: const Duration(milliseconds: 650),
      curve: Curves.elasticOut,
      builder: (context, value, child) =>

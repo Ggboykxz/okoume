@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/art.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/ui/common.dart';
+import '../../core/ui/motion.dart';
 import '../../data/models.dart';
 import '../../data/providers.dart';
 import '../shell/main_shell.dart';
@@ -217,7 +218,8 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
        GestureDetector(
         onTap: () => setState(() => _emoji = emoji),
         child: AnimatedContainer(
-         duration: const Duration(milliseconds: 140),
+         duration: AppMotion.on(context) ? const Duration(milliseconds: 140) : Duration.zero,
+         curve: Curves.easeOutCubic,
          decoration: BoxDecoration(
           color: _emoji == emoji
             ? cs.primary.withValues(alpha: 0.12)
@@ -417,7 +419,7 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
      children: [
       Center(
        child: TweenAnimationBuilder<double>(
-        tween: Tween(begin: 0, end: 1),
+        tween: AppMotion.on(context) ? Tween(begin: 0, end: 1) : ConstantTween<double>(1.0),
         duration: const Duration(milliseconds: 650),
         curve: Curves.elasticOut,
         builder: (context, value, child) =>
@@ -497,14 +499,18 @@ class _QuickSellScreenState extends ConsumerState<QuickSellScreen> {
             style: const TextStyle(
               fontWeight: FontWeight.w700, fontSize: 13)),
          ),
-         GestureDetector(
-          onTap: () async {
+         IconButton(
+          tooltip: 'Copier le lien',
+          icon: AppIcon(AppIcons.copy_rounded,
+            size: 18, color: cs.onSurfaceVariant),
+          iconSize: 18,
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+          onPressed: () async {
            await Clipboard.setData(ClipboardData(text: 'https://$link'));
            if (!mounted) return;
            showAppSnack(context, 'Lien copié', emoji: '');
           },
-          child: AppIcon(AppIcons.copy_rounded,
-            size: 18, color: cs.onSurfaceVariant),
          ),
         ],
        ),
