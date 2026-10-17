@@ -43,6 +43,7 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
  final updated =
   ref.read(ordersProvider.notifier).advance(order.id);
  if (updated != null) {
+  AppMotion.tap();
   showAppSnack(
   context,
   'Statut mis à jour : ${updated.status.emoji.isNotEmpty ? updated.status.emoji : '•'} ${updated.status.label}',
@@ -93,12 +94,14 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
  final ok = ref.read(ordersProvider.notifier).confirmDelivery(order.id, otp);
  if (!mounted) return;
  if (ok) {
+  AppMotion.success();
   showAppSnack(
   context,
   'Réception confirmée — paiement libéré au vendeur ',
   emoji: '',
   );
  } else {
+  AppMotion.warning();
   showAppSnack(
   context,
   'Code incorrect ou livraison pas encore en cours. Le code se trouve dans la carte Code de remise .',
@@ -583,7 +586,7 @@ class _OrderTrackingScreenState extends ConsumerState<OrderTrackingScreen> {
       child: Text(
       order.addressLabel,
       textAlign: TextAlign.right,
-      maxLines: 1,
+      maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
        fontSize: 11.5, color: cs.onSurfaceVariant),
@@ -710,8 +713,8 @@ class _TimelineRow extends StatelessWidget {
     ),
     alignment: Alignment.center,
     child: done
-     ? const AppIcon(AppIcons.check_rounded,
-      size: 14, color: Colors.white)
+     ? AppIcon(AppIcons.check_rounded,
+      size: 14, color: cs.onPrimary)
      : current
       ? Container(
        width: 9,
@@ -800,7 +803,8 @@ class _CourierSpriteState extends State<_CourierSprite> {
 
  @override
  Widget build(BuildContext context) {
- return GestureDetector(
+ return ExcludeSemantics(
+  child: GestureDetector(
   onTap: _bump,
   child: SizedBox(
   width: 76,
@@ -812,6 +816,7 @@ class _CourierSpriteState extends State<_CourierSprite> {
    onReady: (controller) => _controller = controller,
    fallback: const _MapMarker(
     emoji: '', color: AppColors.success, size: 44),
+  ),
   ),
   ),
  );
@@ -857,15 +862,20 @@ class _RatingPickerState extends State<_RatingPicker> {
   children: [
   for (var i = 1; i <= 5; i++)
    GestureDetector(
+   behavior: HitTestBehavior.opaque,
    onTap: () => _select(i),
-   child: Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 5),
-    child: Icon(
-    i <= widget.rating
-     ? Icons.star_rounded
-     : Icons.star_outline_rounded,
-    size: 38,
-    color: AppColors.warning,
+   child: SizedBox(
+    width: 44,
+    height: 44,
+    child: Padding(
+     padding: const EdgeInsets.all(3),
+     child: Icon(
+     i <= widget.rating
+      ? Icons.star_rounded
+      : Icons.star_outline_rounded,
+     size: 38,
+     color: AppColors.warning,
+     ),
     ),
    ),
    ),
