@@ -90,11 +90,15 @@ class OrderSuccessScreen extends ConsumerWidget {
        style: const TextStyle(
         fontWeight: FontWeight.w700, fontSize: 13.5)),
       const Spacer(),
-      GestureDetector(
-      onTap: () => showAppSnack(
-       context, 'Numéro de commande copié', emoji: ''),
-      child: AppIcon(AppIcons.copy_rounded,
+      IconButton(
+      tooltip: 'Copier le numéro de commande',
+      icon: AppIcon(AppIcons.copy_rounded,
        size: 17, color: cs.onSurfaceVariant),
+      iconSize: 17,
+      padding: EdgeInsets.zero,
+      constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
+      onPressed: () => showAppSnack(
+       context, 'Numéro de commande copié', emoji: ''),
       ),
      ],
      ),

@@ -7,6 +7,7 @@ import '../../core/format.dart';
 import '../../core/ui/common.dart';
 import '../../data/models.dart';
 import '../../data/providers.dart';
+import '../../core/theme/app_colors.dart';
 import '../../core/ui/app_icons.dart';
 
 class OrdersScreen extends ConsumerStatefulWidget {
@@ -55,7 +56,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
      label: 'Livrées (${delivered.length})',
      icon: AppIcons.check_circle_rounded,
      selected: _tab == 1,
-     color: const Color(0xFF00C853),
+     color: AppColors.successDeep,
      onTap: () => setState(() => _tab = 1),
     ),
     const SizedBox(width: 8),
@@ -63,7 +64,7 @@ class _OrdersScreenState extends ConsumerState<OrdersScreen> {
      label: 'Annulées (${cancelled.length})',
      icon: AppIcons.cancel_rounded,
      selected: _tab == 2,
-     color: const Color(0xFFFF1744),
+     color: AppColors.dangerDeep,
      onTap: () => setState(() => _tab = 2),
     ),
     ],
@@ -177,7 +178,7 @@ class _OrderCard extends StatelessWidget {
     AppButton(
      label: 'Suivre',
      small: true,
-     height: 38,
+     height: 44,
      expanded: false,
      icon: AppIcons.local_shipping_rounded,
      onPressed: () => context.push('/order/${order.id}'),
@@ -186,7 +187,7 @@ class _OrderCard extends StatelessWidget {
     AppButton(
      label: 'Noter',
      small: true,
-     height: 38,
+     height: 44,
      expanded: false,
      icon: AppIcons.star_rounded,
      onPressed: () => context.push('/order/${order.id}'),
@@ -195,7 +196,7 @@ class _OrderCard extends StatelessWidget {
     AppButton(
      label: 'Détails',
      small: true,
-     height: 38,
+     height: 44,
      expanded: false,
      variant: AppButtonVariant.outline,
      onPressed: () => context.push('/order/${order.id}'),
